@@ -11,9 +11,11 @@
     /* ---- Contact Grid ---- */
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
       align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     @media (max-width: 768px) {
@@ -23,6 +25,12 @@
       }
     }
 
+    /* ---- Contact Info Side ---- */
+    .contact-info-side h2 {
+      margin-top: 12px;
+      margin-bottom: 32px;
+    }
+
     /* ---- Contact Info List ---- */
     .contact-info-list {
       list-style: none;
@@ -30,27 +38,38 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 0;
     }
 
     .contact-info-list li {
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
+      gap: 4px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-info-list li:first-child {
+      padding-top: 0;
+    }
+
+    .contact-info-list li:last-child {
+      border-bottom: none;
     }
 
     .contact-info-list .info-label {
       font-family: var(--font-heading);
       font-size: 0.6875rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--accent);
     }
 
     .contact-info-list .info-value {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--text);
+      line-height: 1.5;
     }
 
     .contact-info-list a.info-value {
@@ -63,10 +82,40 @@
       color: var(--accent);
     }
 
+    /* ---- Form Side ---- */
+    .contact-form-side h2 {
+      margin-top: 12px;
+      margin-bottom: 32px;
+    }
+
+    .contact-form-side .form-group {
+      margin-bottom: 24px;
+    }
+
+    .contact-form-side .form-group label {
+      margin-bottom: 10px;
+    }
+
+    .contact-form-side .form-group input,
+    .contact-form-side .form-group textarea {
+      padding: 16px 18px;
+      font-size: 1rem;
+    }
+
+    .contact-form-side .form-group textarea {
+      min-height: 160px;
+    }
+
+    .contact-form-side .btn {
+      padding: 18px 36px;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
     /* ---- Map Section ---- */
     .location-map {
       width: 100%;
-      height: 400px;
+      height: 450px;
       display: block;
       border: 0;
       filter: grayscale(1) invert(1) contrast(1.1) brightness(0.6);
@@ -95,7 +144,7 @@
       <div class="contact-grid">
 
         <!-- Left: Direct Info -->
-        <div class="reveal">
+        <div class="contact-info-side reveal">
           <span class="label">Direct</span>
           <h2>Reach Us</h2>
           <ul class="contact-info-list">
@@ -123,7 +172,7 @@
         </div>
 
         <!-- Right: Contact Form -->
-        <div class="reveal">
+        <div class="contact-form-side reveal">
           <span class="label">Message</span>
           <h2>Send Us a Message</h2>
 
