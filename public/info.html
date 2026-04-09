@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info — Powerline Tattoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* =============================================
+       INFO PAGE STYLES
+       ============================================= */
+
+    .page-header {
+      padding: calc(var(--nav-height) + 80px) 0 60px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* --- Tabs --- */
+    .info-section {
+      padding: 0 0 100px;
+    }
+
+    .tabs-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tab-list {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      gap: 0;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: -1px;
+      padding: 14px 28px;
+      text-transform: uppercase;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      border-bottom-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* --- Accordion --- */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .accordion-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+
+    .accordion-item.open {
+      border-color: var(--accent);
+    }
+
+    .accordion-header {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      justify-content: space-between;
+      padding: 20px 24px;
+      transition: color var(--transition);
+      user-select: none;
+    }
+
+    .accordion-item.open .accordion-header {
+      color: var(--accent);
+    }
+
+    .accordion-icon {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      font-size: 1.2rem;
+      margin-left: 16px;
+      transition: transform 0.3s ease, color var(--transition);
+    }
+
+    .accordion-item.open .accordion-icon {
+      color: var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .accordion-body {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .accordion-body-inner {
+      padding: 0 24px 22px;
+    }
+
+    /* --- Aftercare Steps --- */
+    .aftercare-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .aftercare-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .aftercare-step:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .aftercare-icon {
+      color: var(--accent);
+      display: block;
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .aftercare-step h3 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .aftercare-step p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* --- Release Form Tab --- */
+    .release-form-content {
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .release-form-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .release-form-content p + p {
+      margin-top: -16px;
+    }
+
+    .release-note {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin: 24px auto 0;
+      max-width: 420px;
+      padding: 16px 20px;
+    }
+
+    .btn {
+      border-radius: 2px;
+      cursor: pointer;
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 14px 32px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border: 2px solid var(--accent);
+      color: #0a0a0a;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    @media (max-width: 640px) {
+      .tab-btn {
+        flex: 1;
+        padding: 12px 12px;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+      }
+
+      .aftercare-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .page-header {
+        padding: calc(var(--nav-height) + 48px) 0 40px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .aftercare-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body data-page="info">
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1>Info</h1>
+      <p>Everything you need to know — before, during, and after your tattoo.</p>
+    </div>
+  </header>
+
+  <!-- Tabbed Info Section -->
+  <section class="info-section">
+    <div class="container">
+      <div class="tabs-wrapper">
+
+        <!-- Tab Buttons -->
+        <div class="tab-list" role="tablist">
+          <button class="tab-btn active" data-tab="tab-faq" role="tab" aria-selected="true">FAQ</button>
+          <button class="tab-btn" data-tab="tab-aftercare" role="tab" aria-selected="false">Aftercare</button>
+          <button class="tab-btn" data-tab="tab-release" role="tab" aria-selected="false">Release Form</button>
+        </div>
+
+        <!-- FAQ Panel -->
+        <div class="tab-panel active" id="tab-faq" role="tabpanel">
+          <div class="accordion">
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                Do you accept walk-ins?
+                <span class="accordion-icon">+</span>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  No — we are an appointment-only studio. This allows us to give every client our full attention and ensure the best possible result. Please use the Book Now page to schedule a consultation or appointment.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                How much does a tattoo cost?
+                <span class="accordion-icon">+</span>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Pricing depends on size, placement, detail, and the time required. We provide custom quotes during your consultation — there's no one-size-fits-all rate. Reach out via the contact page or book a free consultation to discuss your idea and get an accurate estimate.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                Do I need to leave a deposit?
+                <span class="accordion-icon">+</span>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Yes. A non-refundable deposit is required to secure your appointment. It will be applied toward the total cost of your tattoo. If you need to reschedule, please give us at least 48 hours' notice — deposits may be forfeited for late cancellations or no-shows.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                How should I prepare for my appointment?
+                <span class="accordion-icon">+</span>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Get a good night's sleep, eat a full meal, and stay well-hydrated before your session. Wear comfortable clothing that allows easy access to the area being tattooed. Avoid alcohol for at least 24 hours beforehand — it thins the blood and can affect healing.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                Can I bring a friend?
+                <span class="accordion-icon">+</span>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  One guest is welcome to accompany you. Out of respect for other clients and our artists' focus, additional guests are asked to wait outside. Please do not bring children to the studio.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                What forms of payment do you accept?
+                <span class="accordion-icon">+</span>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  We accept cash, all major credit and debit cards, and payments via Square. Tips are always appreciated and can be given in any of these forms.
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.accordion -->
+        </div><!-- /#tab-faq -->
+
+        <!-- Aftercare Panel -->
+        <div class="tab-panel" id="tab-aftercare" role="tabpanel">
+          <div class="aftercare-steps">
+
+            <div class="aftercare-step reveal">
+              <span class="aftercare-icon">&#9741;</span>
+              <h3>Keep It Clean</h3>
+              <p>Gently wash with unscented antibacterial soap 2–3 times daily. Pat dry — never rub.</p>
+            </div>
+
+            <div class="aftercare-step reveal">
+              <span class="aftercare-icon">&#10026;</span>
+              <h3>Moisturize</h3>
+              <p>Apply a thin layer of unscented lotion or tattoo aftercare balm once the skin is dry. Less is more.</p>
+            </div>
+
+            <div class="aftercare-step reveal">
+              <span class="aftercare-icon">&#9728;</span>
+              <h3>Avoid Sun</h3>
+              <p>Keep your new tattoo out of direct sunlight for at least 3 weeks. Once healed, use SPF 50+ to preserve vibrancy.</p>
+            </div>
+
+            <div class="aftercare-step reveal">
+              <span class="aftercare-icon">&#9832;</span>
+              <h3>No Soaking</h3>
+              <p>Avoid baths, pools, hot tubs, and open water for 2–3 weeks. Showers are fine — just keep it brief and gentle.</p>
+            </div>
+
+            <div class="aftercare-step reveal">
+              <span class="aftercare-icon">&#9888;</span>
+              <h3>Don't Pick or Scratch</h3>
+              <p>Peeling and itching are normal. Resist the urge to pick — it can pull out ink and cause scarring.</p>
+            </div>
+
+            <div class="aftercare-step reveal">
+              <span class="aftercare-icon">&#9742;</span>
+              <h3>Contact Us</h3>
+              <p>Any signs of unusual redness, swelling, or discharge? Reach out immediately. We're here to help.</p>
+            </div>
+
+          </div><!-- /.aftercare-steps -->
+        </div><!-- /#tab-aftercare -->
+
+        <!-- Release Form Panel -->
+        <div class="tab-panel" id="tab-release" role="tabpanel">
+          <div class="release-form-content">
+            <p>
+              All clients are required to complete and sign a release form prior to receiving any tattoo service.
+              You may download the form below, fill it out in advance, and bring it with you on the day of your appointment.
+            </p>
+            <p>
+              The form will also be available to complete in the studio.
+            </p>
+            <a href="/assets/release-form.pdf" download class="btn btn-primary">Download Release Form</a>
+            <div class="release-note">
+              &#9888;&nbsp; All clients must be 18 years of age or older. Valid government-issued photo ID is required at your appointment. No exceptions.
+            </div>
+          </div>
+        </div><!-- /#tab-release -->
+
+      </div><!-- /.tabs-wrapper -->
+    </div><!-- /.container -->
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/accordion.js"></script>
+</body>
+</html>
