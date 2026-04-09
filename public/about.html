@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Powerline Tattoo</title>
+  <meta name="description" content="About Powerline Tattoo — a private custom tattoo studio in Cranston, RI. Award-winning artists, hospital-grade sterilization, appointment only since 2010.">
+  <meta property="og:title" content="About — Powerline Tattoo">
+  <meta property="og:description" content="A private custom tattoo studio offering one-on-one attention and award-winning artistry.">
+  <meta property="og:image" content="/images/shop/shop-01.jpg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
@@ -42,6 +48,60 @@
 
     .reveal:nth-child(2) { transition-delay: 0.1s; }
     .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    .studio-gallery {
+      padding: 0 0 6rem;
+    }
+
+    .studio-gallery h3 {
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary, #fff);
+    }
+
+    .studio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .studio-grid figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .studio-grid img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .studio-grid figure:hover img {
+      transform: scale(1.03);
+    }
+
+    .studio-grid figcaption {
+      font-size: 0.8125rem;
+      color: var(--text-secondary, #999);
+      padding: 0.625rem 0 0;
+    }
+
+    @media (max-width: 768px) {
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .studio-grid img {
+        height: 200px;
+      }
+    }
 
     @media (max-width: 768px) {
       .about-content {
@@ -84,30 +144,50 @@
 
         <div class="about-text">
           <span class="label">The Studio</span>
-          <h2>Built on Passion, Driven by Craft</h2>
+          <h2>A Private Studio Built Around You</h2>
           <p>
-            Powerline Tattoo was founded with a single mission: to deliver exceptional custom tattoos
-            in a welcoming, professional environment. From day one, we've built our reputation on
-            honest consultations, clean work, and art that lasts a lifetime.
+            A tattoo is one of the most powerful forms of personal expression you'll ever commit to — it stays with you for life. At Powerline Tattoo, our mission is simple: deliver the best possible tattoo alongside the best possible experience for every single client.
           </p>
           <p>
-            Every piece we create is a one-of-a-kind collaboration between artist and client.
-            We take the time to understand your vision, refine your concept, and translate it
-            into something you'll be proud to carry on your skin forever. No flash templates —
-            only original, intentional work.
+            As a private studio, we offer a level of one-on-one attention, comfort, and exclusivity that a typical walk-in shop simply cannot match. We don't keep public hours or accept walk-ins — instead, we've built a streamlined process that makes it easy to reach out, talk through your ideas, and ultimately get the tattoo you've been envisioning.
           </p>
           <p>
-            We hold ourselves to the highest sterilization and safety standards in the industry.
-            Our studio is fully autoclave-equipped, and every station is set up fresh for each client.
-            Your health and comfort are never an afterthought.
+            Your journey begins with the tattoo request form on our contact page. That gives us the basics and lets us pair you with the artist best suited to your project. From there, we'll either schedule an in-person consultation or continue refining the details over email. Once the concept is locked in and both artist and client are comfortable, you leave a deposit and book your session.
+          </p>
+          <p>
+            Our staff is a small, hand-picked group of professionals chosen for the excellence they bring to their craft. Powerline artists have earned countless awards and been featured in international publications.
+          </p>
+          <p>
+            You won't find pre-drawn flash hanging on our walls waiting to be picked and stuck. We collaborate with you on the design from the ground up. Bring reference material, bring rough ideas, or come with nothing more than a feeling — we'll work with you no matter how developed your concept is.
           </p>
           <a href="/artists" class="btn btn-outline">Meet Our Artists</a>
         </div>
 
         <div class="about-image">
-          <img src="/images/shop/interior-1.jpg" alt="Powerline Tattoo studio interior" loading="lazy">
+          <img src="/images/shop/shop-01.jpg" alt="Powerline Tattoo reception with reclaimed wood wall and Edison bulb lighting" loading="lazy">
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Studio Gallery -->
+  <section class="studio-gallery">
+    <div class="container">
+      <h3>Inside the Studio</h3>
+      <div class="studio-grid reveal">
+        <figure>
+          <img src="/images/shop/shop-02.jpg" alt="Trophy shelf displaying awards and press clippings" loading="lazy">
+          <figcaption>Awards and press recognition</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/shop/shop-03.jpg" alt="Artist workspace with leather couch and framed artwork" loading="lazy">
+          <figcaption>Comfortable client consultation area</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/shop/shop-04.jpg" alt="Clean private tattoo room" loading="lazy">
+          <figcaption>Private tattoo room</figcaption>
+        </figure>
       </div>
     </div>
   </section>

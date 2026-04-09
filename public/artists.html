@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artists — Powerline Tattoo</title>
+  <meta name="description" content="Meet the artists at Powerline Tattoo in Cranston, RI. 9 talented tattoo artists specializing in realism, neo-traditional, American traditional, black & grey, and more.">
+  <meta property="og:title" content="Artists — Powerline Tattoo">
+  <meta property="og:description" content="Meet our 9 talented tattoo artists. Each with a distinct voice and commitment to exceptional work.">
+  <meta property="og:image" content="/images/shop/shop-01.jpg">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
@@ -29,7 +35,7 @@
     }
 
     .artists-section {
-      padding: 0 0 100px;
+      padding: 0 0 60px;
     }
 
     .artists-grid {
@@ -195,6 +201,87 @@
       color: var(--accent);
     }
 
+    /* --- Team Section --- */
+    .team-section {
+      padding: 0 0 100px;
+    }
+
+    .team-header {
+      text-align: center;
+      padding: 40px 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .team-header h2 {
+      margin-bottom: 12px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--text);
+    }
+
+    .team-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .team-card .team-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+    }
+
+    .team-card .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-card .team-info {
+      padding: 24px;
+    }
+
+    .team-card .team-info h3 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .team-card .team-role {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .team-card .team-bio {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
     /* --- Reveal Animation --- */
     .reveal {
       opacity: 0;
@@ -215,6 +302,11 @@
         grid-template-columns: 1fr;
         max-width: 480px;
         margin: 0 auto;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
       }
 
       .artists-header {
@@ -248,20 +340,18 @@
             <p class="artist-specialty">Realism &amp; Color</p>
             <p class="artist-experience">Owner &bull; 15+ years experience</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
             <p class="artist-bio">
-              Owner and lead artist at Powerline Tattoo. Evan's award-winning photorealistic color work has earned him
-              recognition at conventions up and down the East Coast. From hyperrealistic portraits to vivid nature scenes,
-              he brings a fine-art sensibility to every piece.
+              Owner and lead artist at Powerline Tattoo. Evan holds a Bachelor's Degree in Illustration from the Rhode Island School of Design, and brings a fine-art sensibility to every piece. His award-winning photorealistic color work has earned him recognition at conventions up and down the East Coast. Favorite subjects include anything dark or horror-related, wildlife and animals, portraits, and anything he can render in his realistic style.
             </p>
             <div class="artist-gallery">
-              <img src="/images/gallery/evan-olin/evan-01.png" alt="Evan Olin portfolio" loading="lazy">
-              <img src="/images/gallery/evan-olin/evan-02.png" alt="Evan Olin portfolio" loading="lazy">
-              <img src="/images/gallery/evan-olin/evan-03.png" alt="Evan Olin portfolio" loading="lazy">
-              <img src="/images/gallery/evan-olin/evan-04.png" alt="Evan Olin portfolio" loading="lazy">
-              <img src="/images/gallery/evan-olin/evan-05.png" alt="Evan Olin portfolio" loading="lazy">
-              <img src="/images/gallery/evan-olin/evan-06.png" alt="Evan Olin portfolio" loading="lazy">
+              <img src="/images/gallery/evan-olin/evan-01.png" alt="Evan Olin tattoo work" loading="lazy">
+              <img src="/images/gallery/evan-olin/evan-02.png" alt="Evan Olin tattoo work" loading="lazy">
+              <img src="/images/gallery/evan-olin/evan-03.png" alt="Evan Olin tattoo work" loading="lazy">
+              <img src="/images/gallery/evan-olin/evan-04.png" alt="Evan Olin tattoo work" loading="lazy">
+              <img src="/images/gallery/evan-olin/evan-05.png" alt="Evan Olin tattoo work" loading="lazy">
+              <img src="/images/gallery/evan-olin/evan-06.png" alt="Evan Olin tattoo work" loading="lazy">
             </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Evan</a>
@@ -277,25 +367,25 @@
           </div>
           <div class="artist-info">
             <h3>Mike Ledoux</h3>
-            <p class="artist-specialty">Custom</p>
-            <p class="artist-experience">Resident Artist</p>
+            <p class="artist-specialty">Illustrative Realism</p>
+            <p class="artist-experience">Resident Artist &bull; 20+ years experience</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
             <p class="artist-bio">
-              Mike brings versatility and precision to every piece he creates. Known for his attention to detail and client-first approach, he works closely with each person to deliver tattoos that exceed expectations.
+              Tattooing in Rhode Island studios since 2003, Mike holds a Master's Degree in Art Education from Rhode Island College. While experienced in a wide variety of techniques, his strength lies in his illustrative style — fusing realism with inventive physics and creative secondary lighting. Think Dr. Seuss meets John Audubon, or Salvador Dali sitting on Norman Rockwell's lap.
             </p>
             <div class="artist-gallery">
-              <img src="/images/gallery/mike-ledoux/mike-01.png" alt="Mike Ledoux portfolio" loading="lazy">
-              <img src="/images/gallery/mike-ledoux/mike-02.png" alt="Mike Ledoux portfolio" loading="lazy">
-              <img src="/images/gallery/mike-ledoux/mike-03.png" alt="Mike Ledoux portfolio" loading="lazy">
-              <img src="/images/gallery/mike-ledoux/mike-04.png" alt="Mike Ledoux portfolio" loading="lazy">
-              <img src="/images/gallery/mike-ledoux/mike-05.png" alt="Mike Ledoux portfolio" loading="lazy">
-              <img src="/images/gallery/mike-ledoux/mike-06.png" alt="Mike Ledoux portfolio" loading="lazy">
+              <img src="/images/gallery/mike-ledoux/mike-01.png" alt="Mike Ledoux tattoo work" loading="lazy">
+              <img src="/images/gallery/mike-ledoux/mike-02.png" alt="Mike Ledoux tattoo work" loading="lazy">
+              <img src="/images/gallery/mike-ledoux/mike-03.png" alt="Mike Ledoux tattoo work" loading="lazy">
+              <img src="/images/gallery/mike-ledoux/mike-04.png" alt="Mike Ledoux tattoo work" loading="lazy">
+              <img src="/images/gallery/mike-ledoux/mike-05.png" alt="Mike Ledoux tattoo work" loading="lazy">
+              <img src="/images/gallery/mike-ledoux/mike-06.png" alt="Mike Ledoux tattoo work" loading="lazy">
             </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Mike</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/mledouxtattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@mledouxtattoo</a>
             </div>
           </div>
         </article>
@@ -307,25 +397,25 @@
           </div>
           <div class="artist-info">
             <h3>Mikey Romasco</h3>
-            <p class="artist-specialty">Custom</p>
-            <p class="artist-experience">Resident Artist</p>
+            <p class="artist-specialty">Black &amp; Grey Realism &amp; Portraiture</p>
+            <p class="artist-experience">Resident Artist &bull; 15+ years experience</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
             <p class="artist-bio">
-              Mikey's bold, confident style and creative vision make him a standout at Powerline. He thrives on collaborative design and loves turning clients' ideas into striking, wearable art.
+              A lifelong Massachusetts resident, Mikey developed a passion for art at a young age — starting with graphite drawings and portraiture. Tattooing since 2009, his main strength is black and grey realism and portraiture, though he also works in an illustrative neo-traditional style. Whatever the piece, his goal is to create something unique that flows with the body.
             </p>
             <div class="artist-gallery">
-              <img src="/images/gallery/mikey-romasco/mikey-01.png" alt="Mikey Romasco portfolio" loading="lazy">
-              <img src="/images/gallery/mikey-romasco/mikey-02.png" alt="Mikey Romasco portfolio" loading="lazy">
-              <img src="/images/gallery/mikey-romasco/mikey-03.png" alt="Mikey Romasco portfolio" loading="lazy">
-              <img src="/images/gallery/mikey-romasco/mikey-04.png" alt="Mikey Romasco portfolio" loading="lazy">
-              <img src="/images/gallery/mikey-romasco/mikey-05.png" alt="Mikey Romasco portfolio" loading="lazy">
-              <img src="/images/gallery/mikey-romasco/mikey-06.png" alt="Mikey Romasco portfolio" loading="lazy">
+              <img src="/images/gallery/mikey-romasco/mikey-01.png" alt="Mikey Romasco tattoo work" loading="lazy">
+              <img src="/images/gallery/mikey-romasco/mikey-02.png" alt="Mikey Romasco tattoo work" loading="lazy">
+              <img src="/images/gallery/mikey-romasco/mikey-03.png" alt="Mikey Romasco tattoo work" loading="lazy">
+              <img src="/images/gallery/mikey-romasco/mikey-04.png" alt="Mikey Romasco tattoo work" loading="lazy">
+              <img src="/images/gallery/mikey-romasco/mikey-05.png" alt="Mikey Romasco tattoo work" loading="lazy">
+              <img src="/images/gallery/mikey-romasco/mikey-06.png" alt="Mikey Romasco tattoo work" loading="lazy">
             </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Mikey</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/mikeyffresh" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@mikeyffresh</a>
             </div>
           </div>
         </article>
@@ -333,19 +423,29 @@
         <!-- Artist 4: Andy Large -->
         <article class="artist-card reveal" onclick="toggleArtist(this)">
           <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">AL</div>
+            <img src="/images/artists/andy-large.jpg" alt="Andy Large" loading="lazy">
           </div>
           <div class="artist-info">
             <h3>Andy Large</h3>
-            <p class="artist-specialty">Custom</p>
+            <p class="artist-specialty">Dynamic Realism &amp; Surrealism</p>
             <p class="artist-experience">Resident Artist</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
+            <p class="artist-bio">
+              Born and raised in Rhode Island, Andy focuses on making dynamic realism tattoos with surreal elements. Favorite subjects include nature, animals, flowers, human portraiture, and space. He mostly takes on larger projects, enjoying the challenge of creating big, interesting compositions with complex detail. With a background in illustration and painting, he brings those influences into every piece.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/andy-large/andy-01.jpg" alt="Andy Large tattoo work" loading="lazy">
+              <img src="/images/gallery/andy-large/andy-02.jpg" alt="Andy Large tattoo work" loading="lazy">
+              <img src="/images/gallery/andy-large/andy-03.jpg" alt="Andy Large tattoo work" loading="lazy">
+              <img src="/images/gallery/andy-large/andy-04.jpg" alt="Andy Large tattoo work" loading="lazy">
+              <img src="/images/gallery/andy-large/andy-05.jpg" alt="Andy Large tattoo work" loading="lazy">
+              <img src="/images/gallery/andy-large/andy-06.jpg" alt="Andy Large tattoo work" loading="lazy">
+            </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Andy</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/andylargetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@andylargetattoo</a>
             </div>
           </div>
         </article>
@@ -353,19 +453,29 @@
         <!-- Artist 5: Andrey Vasilyev -->
         <article class="artist-card reveal" onclick="toggleArtist(this)">
           <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">AV</div>
+            <img src="/images/artists/andrey-vasilyev.jpg" alt="Andrey Vasilyev" loading="lazy">
           </div>
           <div class="artist-info">
             <h3>Andrey Vasilyev</h3>
-            <p class="artist-specialty">Custom</p>
+            <p class="artist-specialty">Color Neo-Traditional</p>
             <p class="artist-experience">Resident Artist</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
+            <p class="artist-bio">
+              Andrey's preferred style is color neo-traditional, featuring bold lines and vibrant colors. He focuses on illustrating beautiful, unique designs that stand out — from illustrative portraits and flowers to daggers and skulls. He uses his drawing and illustration skills for both custom work and pre-drawn designs.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/andrey-vasilyev/andrey-01.jpg" alt="Andrey Vasilyev tattoo work" loading="lazy">
+              <img src="/images/gallery/andrey-vasilyev/andrey-02.jpg" alt="Andrey Vasilyev tattoo work" loading="lazy">
+              <img src="/images/gallery/andrey-vasilyev/andrey-03.jpg" alt="Andrey Vasilyev tattoo work" loading="lazy">
+              <img src="/images/gallery/andrey-vasilyev/andrey-04.jpg" alt="Andrey Vasilyev tattoo work" loading="lazy">
+              <img src="/images/gallery/andrey-vasilyev/andrey-05.jpg" alt="Andrey Vasilyev tattoo work" loading="lazy">
+              <img src="/images/gallery/andrey-vasilyev/andrey-06.jpg" alt="Andrey Vasilyev tattoo work" loading="lazy">
+            </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Andrey</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/andreytattooing" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@andreytattooing</a>
             </div>
           </div>
         </article>
@@ -373,19 +483,29 @@
         <!-- Artist 6: DJ Lebeau -->
         <article class="artist-card reveal" onclick="toggleArtist(this)">
           <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">DL</div>
+            <img src="/images/artists/dj-lebeau.jpg" alt="DJ Lebeau" loading="lazy">
           </div>
           <div class="artist-info">
             <h3>DJ Lebeau</h3>
-            <p class="artist-specialty">Custom</p>
-            <p class="artist-experience">Resident Artist</p>
+            <p class="artist-specialty">Color Realism &amp; Black &amp; Grey</p>
+            <p class="artist-experience">Resident Artist &bull; 13+ years experience</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
+            <p class="artist-bio">
+              Born in Attleboro, MA, DJ started his art career as an airbrush and pinstripe artist. With over 13 years of experience in tattooing, he's a passionate artist dedicated to creating stunning and unique designs. He specializes in color realism, animal portraits, horror themes, and black and grey realism.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/dj-lebeau/dj-01.jpg" alt="DJ Lebeau tattoo work" loading="lazy">
+              <img src="/images/gallery/dj-lebeau/dj-02.jpg" alt="DJ Lebeau tattoo work" loading="lazy">
+              <img src="/images/gallery/dj-lebeau/dj-03.jpg" alt="DJ Lebeau tattoo work" loading="lazy">
+              <img src="/images/gallery/dj-lebeau/dj-04.jpg" alt="DJ Lebeau tattoo work" loading="lazy">
+              <img src="/images/gallery/dj-lebeau/dj-05.jpg" alt="DJ Lebeau tattoo work" loading="lazy">
+              <img src="/images/gallery/dj-lebeau/dj-06.jpg" alt="DJ Lebeau tattoo work" loading="lazy">
+            </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book DJ</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/artworkby_dj" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@artworkby_dj</a>
             </div>
           </div>
         </article>
@@ -393,19 +513,29 @@
         <!-- Artist 7: Dana Morse -->
         <article class="artist-card reveal" onclick="toggleArtist(this)">
           <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">DM</div>
+            <img src="/images/artists/dana-morse.jpg" alt="Dana Morse" loading="lazy">
           </div>
           <div class="artist-info">
             <h3>Dana Morse</h3>
-            <p class="artist-specialty">Custom</p>
-            <p class="artist-experience">Resident Artist</p>
+            <p class="artist-specialty">Versatile &mdash; Traditional to Realism</p>
+            <p class="artist-experience">Resident Artist &bull; 18+ years experience</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
+            <p class="artist-bio">
+              A tattoo artist with over 18 years of experience, Dana began tattooing at age 18 in Saint Johnsbury, Vermont, and has worked across the country and internationally. She specializes in everything from bold traditional to intricate realism, and loves blending styles to craft unique designs. She's passionate about creating custom, one-of-a-kind artwork.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/dana-morse/dana-01.jpg" alt="Dana Morse tattoo work" loading="lazy">
+              <img src="/images/gallery/dana-morse/dana-02.jpg" alt="Dana Morse tattoo work" loading="lazy">
+              <img src="/images/gallery/dana-morse/dana-03.jpg" alt="Dana Morse tattoo work" loading="lazy">
+              <img src="/images/gallery/dana-morse/dana-04.jpg" alt="Dana Morse tattoo work" loading="lazy">
+              <img src="/images/gallery/dana-morse/dana-05.jpg" alt="Dana Morse tattoo work" loading="lazy">
+              <img src="/images/gallery/dana-morse/dana-06.jpg" alt="Dana Morse tattoo work" loading="lazy">
+            </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Dana</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/danamorsetattoos" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@danamorsetattoos</a>
             </div>
           </div>
         </article>
@@ -413,19 +543,29 @@
         <!-- Artist 8: Jake Meo -->
         <article class="artist-card reveal" onclick="toggleArtist(this)">
           <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">JM</div>
+            <img src="/images/artists/jake-meo.jpg" alt="Jake Meo" loading="lazy">
           </div>
           <div class="artist-info">
             <h3>Jake Meo</h3>
-            <p class="artist-specialty">Custom</p>
+            <p class="artist-specialty">American Traditional</p>
             <p class="artist-experience">Resident Artist</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
+            <p class="artist-bio">
+              Jake brings bold and bright American traditional straight out of Providence. Tattooing since 2019, he's earned his name with large-scale classics, heavy saturation, and designs that respect the roots without copying the past. While American traditional is his foundation, Jake is happy to tattoo all styles — bringing the same focus, care, and attention to every piece.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/jake-meo/jake-01.jpg" alt="Jake Meo tattoo work" loading="lazy">
+              <img src="/images/gallery/jake-meo/jake-02.jpg" alt="Jake Meo tattoo work" loading="lazy">
+              <img src="/images/gallery/jake-meo/jake-03.jpg" alt="Jake Meo tattoo work" loading="lazy">
+              <img src="/images/gallery/jake-meo/jake-04.jpg" alt="Jake Meo tattoo work" loading="lazy">
+              <img src="/images/gallery/jake-meo/jake-05.jpg" alt="Jake Meo tattoo work" loading="lazy">
+              <img src="/images/gallery/jake-meo/jake-06.jpg" alt="Jake Meo tattoo work" loading="lazy">
+            </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Jake</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/jakemeotattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@jakemeotattoo</a>
             </div>
           </div>
         </article>
@@ -433,64 +573,75 @@
         <!-- Artist 9: Chris Valencia -->
         <article class="artist-card reveal" onclick="toggleArtist(this)">
           <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">CV</div>
+            <img src="/images/artists/chris-valencia.jpg" alt="Chris Valencia" loading="lazy">
           </div>
           <div class="artist-info">
             <h3>Chris Valencia</h3>
-            <p class="artist-specialty">Custom</p>
+            <p class="artist-specialty">Illustrative &amp; Neo-Traditional</p>
             <p class="artist-experience">Resident Artist</p>
           </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
+          <p class="artist-toggle-hint">View Profile &#8595;</p>
           <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
+            <p class="artist-bio">
+              Born and raised in a small town in West Texas, Chris started his career tattooing there before spending about 8 years hopping between shops. After a decade in the Atlanta, Georgia area advancing his craft, he's now in Rhode Island full time. He works in all styles but especially enjoys illustrative, neo-traditional, and new school tattoos — combining different elements to create fun, surreal images with an animated, whimsical feel.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/chris-valencia/chris-01.jpg" alt="Chris Valencia tattoo work" loading="lazy">
+              <img src="/images/gallery/chris-valencia/chris-02.jpg" alt="Chris Valencia tattoo work" loading="lazy">
+              <img src="/images/gallery/chris-valencia/chris-03.jpg" alt="Chris Valencia tattoo work" loading="lazy">
+              <img src="/images/gallery/chris-valencia/chris-04.jpg" alt="Chris Valencia tattoo work" loading="lazy">
+              <img src="/images/gallery/chris-valencia/chris-05.jpg" alt="Chris Valencia tattoo work" loading="lazy">
+              <img src="/images/gallery/chris-valencia/chris-06.jpg" alt="Chris Valencia tattoo work" loading="lazy">
+            </div>
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Chris</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Artist 10: Kara Olin -->
-        <article class="artist-card reveal" onclick="toggleArtist(this)">
-          <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">KO</div>
-          </div>
-          <div class="artist-info">
-            <h3>Kara Olin</h3>
-            <p class="artist-specialty">Custom</p>
-            <p class="artist-experience">Resident Artist</p>
-          </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
-          <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
-            <div class="artist-links">
-              <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Kara</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Artist 11: Krystal McElreath -->
-        <article class="artist-card reveal" onclick="toggleArtist(this)">
-          <div class="artist-photo">
-            <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--accent);font-family:var(--font-heading);font-weight:700;border:1px solid var(--border);">KM</div>
-          </div>
-          <div class="artist-info">
-            <h3>Krystal McElreath</h3>
-            <p class="artist-specialty">Custom</p>
-            <p class="artist-experience">Resident Artist</p>
-          </div>
-          <p class="artist-toggle-hint">View Profile ↓</p>
-          <div class="artist-expanded">
-            <p class="artist-bio" style="padding-bottom: 24px;">Portfolio coming soon</p>
-            <div class="artist-links">
-              <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Krystal</a>
-              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+              <a href="https://instagram.com/cvalencia7" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@cvalencia7</a>
             </div>
           </div>
         </article>
 
       </div><!-- /.artists-grid -->
+    </div><!-- /.container -->
+  </section>
+
+  <!-- Behind the Scenes: Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="team-header">
+        <h2>Behind the Scenes</h2>
+        <p>The people who keep Powerline running smoothly behind the chair.</p>
+      </div>
+      <div class="team-grid">
+
+        <!-- Team: Kara Olin -->
+        <div class="team-card reveal">
+          <div class="team-photo">
+            <img src="/images/team/kara-olin.jpg" alt="Kara Olin" loading="lazy">
+          </div>
+          <div class="team-info">
+            <h3>Kara Olin</h3>
+            <p class="team-role">Co-Owner &amp; Business Manager</p>
+            <p class="team-bio">
+              Co-owner of Powerline Tattoo with her husband Evan. With a Bachelor's Degree in Foodservice Entrepreneurship, Kara handles the business side — managing operations so Evan can focus on his art and the creative aspects of the shop.
+            </p>
+          </div>
+        </div>
+
+        <!-- Team: Krystal McElreath -->
+        <div class="team-card reveal">
+          <div class="team-photo">
+            <img src="/images/team/krystal-mcelreath.jpg" alt="Krystal McElreath" loading="lazy">
+          </div>
+          <div class="team-info">
+            <h3>Krystal McElreath</h3>
+            <p class="team-role">Shop Manager</p>
+            <p class="team-bio">
+              With Powerline since 2013, Krystal is Kara's right hand on the business side. She creates a welcoming, clean, and professional environment, helping with questions, schedules, and ensuring everything runs smoothly day to day.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /.team-grid -->
     </div><!-- /.container -->
   </section>
 

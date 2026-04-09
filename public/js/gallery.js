@@ -13,7 +13,7 @@ function initFilters() {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       items.forEach(item => {
-        if (filter === 'all' || item.dataset.style === filter) {
+        if (filter === 'all' || item.dataset.artist === filter) {
           item.style.display = '';
         } else {
           item.style.display = 'none';
