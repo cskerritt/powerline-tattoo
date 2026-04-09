@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Powerline Tattoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* =============================================
+       ABOUT PAGE STYLES
+       ============================================= */
+
+    .about-story {
+      padding: 6rem 0;
+    }
+
+    .about-location {
+      padding: 6rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .location-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-image {
+        order: -1;
+      }
+
+      .location-card {
+        grid-template-columns: 1fr;
+      }
+
+      .location-actions {
+        flex-direction: column;
+      }
+
+      .location-actions .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body data-page="about">
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1>About Powerline</h1>
+      <p>Where artistry meets craftsmanship.</p>
+    </div>
+  </header>
+
+  <!-- Story Section -->
+  <section class="about-story">
+    <div class="container">
+      <div class="about-content reveal">
+
+        <div class="about-text">
+          <span class="label">The Studio</span>
+          <h2>Built on Passion, Driven by Craft</h2>
+          <p>
+            Powerline Tattoo was founded with a single mission: to deliver exceptional custom tattoos
+            in a welcoming, professional environment. From day one, we've built our reputation on
+            honest consultations, clean work, and art that lasts a lifetime.
+          </p>
+          <p>
+            Every piece we create is a one-of-a-kind collaboration between artist and client.
+            We take the time to understand your vision, refine your concept, and translate it
+            into something you'll be proud to carry on your skin forever. No flash templates —
+            only original, intentional work.
+          </p>
+          <p>
+            We hold ourselves to the highest sterilization and safety standards in the industry.
+            Our studio is fully autoclave-equipped, and every station is set up fresh for each client.
+            Your health and comfort are never an afterthought.
+          </p>
+          <a href="/artists" class="btn btn-outline">Meet Our Artists</a>
+        </div>
+
+        <div class="about-image">
+          <img src="/images/shop/interior.jpg" alt="Powerline Tattoo studio interior" loading="lazy">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section class="about-location">
+    <div class="container">
+
+      <div class="location-card reveal">
+        <div class="location-info">
+          <h3>Find Us</h3>
+
+          <div class="location-detail">
+            <svg class="location-detail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <p>706 Reservoir Ave<br>Cranston, RI 02910</p>
+          </div>
+
+          <div class="location-detail">
+            <svg class="location-detail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16"/>
+            </svg>
+            <p><a href="tel:4013697771">401-369-7771</a></p>
+          </div>
+
+          <div class="location-detail">
+            <svg class="location-detail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <p><a href="mailto:powerlinetattoo@gmail.com">powerlinetattoo@gmail.com</a></p>
+          </div>
+
+          <div class="location-detail">
+            <svg class="location-detail-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <p>By Appointment Only<br><span style="font-size: 0.875rem;">No walk-ins accepted</span></p>
+          </div>
+
+          <div class="location-actions">
+            <a href="/book" class="btn btn-primary">Book Now</a>
+            <a href="/contact" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2974.8!2d-71.4352!3d41.7721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDQ2JzE5LjYiTiA3McKwMjYnMDYuNyJX!5e0!3m2!1sen!2sus!4v1"
+            title="Powerline Tattoo location at 706 Reservoir Ave, Cranston RI"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
