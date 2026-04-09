@@ -10,7 +10,15 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1h',
+  setHeaders: (res, filePath) => {
+    // Short cache for images so updates are picked up quickly
+    if (filePath.match(/\.(jpg|jpeg|png|webp|gif)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+  }
+}));
 
 // File upload config for booking form reference images
 const upload = multer({
@@ -99,6 +107,14 @@ const pages = ['artists', 'gallery', 'book', 'info', 'about', 'contact'];
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', `${page}.html`));
+  });
+});
+
+// Individual artist gallery pages
+const artists = ['evan-olin', 'mike-ledoux', 'mikey-romasco', 'andy-large', 'andrey-vasilyev', 'dj-lebeau', 'dana-morse', 'jake-meo', 'chris-valencia'];
+artists.forEach(artist => {
+  app.get(`/artists/${artist}`, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'artists', `${artist}.html`));
   });
 });
 
