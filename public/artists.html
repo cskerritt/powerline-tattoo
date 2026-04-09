@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artists — Powerline Tattoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* =============================================
+       ARTISTS PAGE STYLES
+       ============================================= */
+
+    .artists-header {
+      padding: calc(var(--nav-height) + 80px) 0 60px;
+      text-align: center;
+    }
+
+    .artists-header h1 {
+      margin-bottom: 16px;
+    }
+
+    .artists-header p {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .artists-section {
+      padding: 0 0 100px;
+    }
+
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    /* --- Artist Card --- */
+    .artist-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .artist-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .artist-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+    }
+
+    .artist-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .artist-card:hover .artist-photo img {
+      transform: scale(1.04);
+    }
+
+    .artist-info {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .artist-info h3 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .artist-specialty {
+      color: var(--accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .artist-experience {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .artist-toggle-hint {
+      padding: 10px 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .artist-card:hover .artist-toggle-hint {
+      color: var(--accent);
+    }
+
+    /* --- Expanded Panel --- */
+    .artist-expanded {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .artist-expanded.open {
+      max-height: 1200px;
+    }
+
+    .artist-bio {
+      padding: 24px 24px 0;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .artist-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      padding: 20px 24px;
+    }
+
+    .artist-gallery img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 2px;
+      transition: opacity var(--transition);
+    }
+
+    .artist-gallery img:hover {
+      opacity: 0.8;
+    }
+
+    .artist-links {
+      display: flex;
+      gap: 12px;
+      padding: 0 24px 24px;
+      flex-wrap: wrap;
+    }
+
+    .artist-links .btn {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      padding: 12px 20px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .artist-links .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      border: 2px solid var(--accent);
+    }
+
+    .artist-links .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #0a0a0a;
+    }
+
+    .artist-links .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .artist-links .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* --- Reveal Animation --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    @media (max-width: 768px) {
+      .artists-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .artists-header {
+        padding: calc(var(--nav-height) + 48px) 0 40px;
+      }
+    }
+  </style>
+</head>
+<body data-page="artists">
+
+  <!-- Page Header -->
+  <header class="artists-header">
+    <div class="container">
+      <h1>Meet the Artists</h1>
+      <p>Talented, dedicated artists — each with a distinct voice and a commitment to exceptional work.</p>
+    </div>
+  </header>
+
+  <!-- Artists Grid -->
+  <section class="artists-section">
+    <div class="container">
+      <div class="artists-grid">
+
+        <!-- Artist 1: Evan Olin -->
+        <article class="artist-card reveal" onclick="toggleArtist(this)">
+          <div class="artist-photo">
+            <img src="/images/artists/artist-1.jpg" alt="Evan Olin" loading="lazy">
+          </div>
+          <div class="artist-info">
+            <h3>Evan Olin</h3>
+            <p class="artist-specialty">Realism &amp; Color</p>
+            <p class="artist-experience">15+ years experience</p>
+          </div>
+          <p class="artist-toggle-hint">View Profile ↓</p>
+          <div class="artist-expanded">
+            <p class="artist-bio">
+              Owner and lead artist at Powerline Tattoo. Evan's award-winning photorealistic color work has earned him
+              recognition at conventions up and down the East Coast. From hyperrealistic portraits to vivid nature scenes,
+              he brings a fine-art sensibility to every piece.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/tattoo-01.jpg" alt="Evan Olin portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-02.jpg" alt="Evan Olin portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-03.jpg" alt="Evan Olin portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-05.jpg" alt="Evan Olin portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-06.jpg" alt="Evan Olin portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-07.jpg" alt="Evan Olin portfolio" loading="lazy">
+            </div>
+            <div class="artist-links">
+              <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Evan</a>
+              <a href="https://instagram.com/evanolintattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@evanolintattoo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artist 2 -->
+        <article class="artist-card reveal" onclick="toggleArtist(this)">
+          <div class="artist-photo">
+            <img src="/images/artists/artist-2.jpg" alt="Artist Two" loading="lazy">
+          </div>
+          <div class="artist-info">
+            <h3>Artist Two</h3>
+            <p class="artist-specialty">Traditional &amp; Neo-Traditional</p>
+            <p class="artist-experience">10+ years experience</p>
+          </div>
+          <p class="artist-toggle-hint">View Profile ↓</p>
+          <div class="artist-expanded">
+            <p class="artist-bio">
+              Known for bold lines, rich saturated palettes, and timeless imagery, Artist Two brings deep respect for
+              traditional tattooing together with a modern neo-traditional sensibility. Every piece is built to last
+              a lifetime.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/tattoo-04.jpg" alt="Artist Two portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-08.jpg" alt="Artist Two portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-09.jpg" alt="Artist Two portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-01.jpg" alt="Artist Two portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-05.jpg" alt="Artist Two portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-10.jpg" alt="Artist Two portfolio" loading="lazy">
+            </div>
+            <div class="artist-links">
+              <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Now</a>
+              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artist 3 -->
+        <article class="artist-card reveal" onclick="toggleArtist(this)">
+          <div class="artist-photo">
+            <img src="/images/artists/artist-3.jpg" alt="Artist Three" loading="lazy">
+          </div>
+          <div class="artist-info">
+            <h3>Artist Three</h3>
+            <p class="artist-specialty">Blackwork &amp; Geometric</p>
+            <p class="artist-experience">8+ years experience</p>
+          </div>
+          <p class="artist-toggle-hint">View Profile ↓</p>
+          <div class="artist-expanded">
+            <p class="artist-bio">
+              Specializing in dotwork mandalas, sacred geometry, and ornamental patterns, Artist Three creates intricate
+              blackwork pieces that are as meditative to wear as they are to behold. Consultation recommended for
+              large-scale projects.
+            </p>
+            <div class="artist-gallery">
+              <img src="/images/gallery/tattoo-02.jpg" alt="Artist Three portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-06.jpg" alt="Artist Three portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-10.jpg" alt="Artist Three portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-03.jpg" alt="Artist Three portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-07.jpg" alt="Artist Three portfolio" loading="lazy">
+              <img src="/images/gallery/tattoo-09.jpg" alt="Artist Three portfolio" loading="lazy">
+            </div>
+            <div class="artist-links">
+              <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Now</a>
+              <a href="https://instagram.com/powerlinetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@powerlinetattoo</a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.artists-grid -->
+    </div><!-- /.container -->
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script>
+    function toggleArtist(card) {
+      const expanded = card.querySelector('.artist-expanded');
+      const wasOpen = expanded.classList.contains('open');
+      document.querySelectorAll('.artist-expanded.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) {
+        expanded.classList.add('open');
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  </script>
+</body>
+</html>
