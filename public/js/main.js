@@ -20,7 +20,7 @@ function getNavHTML(activePage) {
   return `
     <nav class="nav" id="main-nav">
       <div class="container">
-        <a href="/" class="nav-logo">Powerline Tattoo</a>
+        <a href="/" class="nav-logo"><img src="/images/logo/powerline-logo.png" alt="Powerline Tattoo" style="height: 50px;"></a>
         <ul class="nav-links">${navLinks}</ul>
         <a href="/book" class="nav-book">Book Now</a>
         <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
@@ -42,7 +42,7 @@ function getFooterHTML() {
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <a href="/" class="nav-logo">Powerline Tattoo</a>
+            <a href="/" class="nav-logo"><img src="/images/logo/powerline-logo.png" alt="Powerline Tattoo" style="height: 50px;"></a>
             <p>New England's premier custom tattoo studio. Appointment only — no walk-ins.</p>
           </div>
           <div class="footer-col">
