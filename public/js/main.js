@@ -19,14 +19,14 @@ function getNavHTML(activePage) {
 
   return `
     <nav class="nav" id="main-nav">
-      <div class="container">
+      <div class="nav-inner">
         <a href="/" class="nav-logo"><img src="/images/logo/powerline-logo.png" alt="Powerline Tattoo" style="height: 50px;"></a>
         <ul class="nav-links">${navLinks}</ul>
         <a href="/book" class="nav-book">Book Now</a>
         <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
-      </div>
+      </div><!-- /.nav-inner -->
     </nav>
     <div class="nav-overlay" id="nav-overlay">
       ${links.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
