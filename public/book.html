@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Session — Powerline Tattoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* ---- Booking Widget ---- */
+    .booking-widget {
+      text-align: center;
+      padding: 3rem 2rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+
+    .booking-widget h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .booking-widget p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      max-width: 480px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* ---- What to Expect ---- */
+    .what-to-expect {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 0;
+    }
+
+    .expect-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .expect-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: var(--bg);
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .expect-item h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .expect-item p {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+
+    /* ---- Fallback Form Section ---- */
+    .fallback-form-section {
+      border-top: 1px solid var(--border);
+    }
+
+    .fallback-form-section .form-wrap {
+      max-width: 720px;
+      margin-inline: auto;
+    }
+
+    /* Select arrow */
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    /* File input */
+    .form-group input[type="file"] {
+      padding: 0.625rem 1rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .form-group input[type="file"]::file-selector-button {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background-color: var(--border);
+      color: var(--text);
+      border: none;
+      padding: 0.4rem 0.875rem;
+      border-radius: 2px;
+      cursor: pointer;
+      margin-right: 0.75rem;
+      transition: background-color var(--transition);
+    }
+
+    .form-group input[type="file"]::file-selector-button:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+    }
+
+    @media (max-width: 640px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body data-page="book">
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <span class="label">Appointment Only</span>
+      <h1>Book Your Session</h1>
+      <p>Ready to bring your vision to life? Use our online scheduler or send us your idea below — we'll get back to you within 1–2 business days.</p>
+    </div>
+  </header>
+
+  <!-- Square Booking Widget -->
+  <section class="section">
+    <div class="container">
+      <div class="booking-widget reveal">
+        <h2>Schedule Online</h2>
+        <p>Book directly through our Square scheduling system. Choose your artist, pick a time, and secure your spot with a deposit.</p>
+        <a
+          href="https://squareup.com/appointments/book/PLACEHOLDER"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Open Booking Calendar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Expect -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">The Process</span>
+        <h2>What to Expect</h2>
+      </div>
+      <div class="what-to-expect">
+
+        <div class="expect-item reveal">
+          <div class="expect-number">1</div>
+          <div>
+            <h3>Consultation</h3>
+            <p>We'll discuss your idea, placement, and size. Your artist will ask questions to make sure they fully understand your vision before any design work begins.</p>
+          </div>
+        </div>
+
+        <div class="expect-item reveal">
+          <div class="expect-number">2</div>
+          <div>
+            <h3>Design &amp; Deposit</h3>
+            <p>Your artist creates a custom design tailored to you. A non-refundable deposit secures your appointment and goes toward the final cost of your tattoo.</p>
+          </div>
+        </div>
+
+        <div class="expect-item reveal">
+          <div class="expect-number">3</div>
+          <div>
+            <h3>Your Session</h3>
+            <p>Come in, get tattooed, and leave with a piece you love. We'll walk you through aftercare instructions so your new ink heals beautifully.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Fallback Booking Form -->
+  <section class="section fallback-form-section">
+    <div class="container">
+      <div class="fallback-form-section form-wrap">
+        <div class="section-header reveal" style="text-align: left; margin-bottom: 2rem;">
+          <span class="label">Prefer Email?</span>
+          <h2>Send Us Your Idea</h2>
+          <p style="margin-inline: 0; text-align: left;">Can't use the scheduler? Fill out the form below and we'll reach out to set up a consultation.</p>
+        </div>
+
+        <form id="booking-form" enctype="multipart/form-data" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name <span style="color: var(--accent);">*</span></label>
+              <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email <span style="color: var(--accent);">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(401) 000-0000" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="artist">Preferred Artist</label>
+              <select id="artist" name="artist">
+                <option value="">No preference</option>
+                <option value="evan-olin">Evan Olin</option>
+                <option value="artist-two">Artist Two</option>
+                <option value="artist-three">Artist Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="idea">Tattoo Idea <span style="color: var(--accent);">*</span></label>
+            <textarea id="idea" name="idea" placeholder="Describe your tattoo idea — style, subject, mood, anything that helps us understand your vision." required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="size">Approximate Size</label>
+              <input type="text" id="size" name="size" placeholder="e.g. palm-sized, full sleeve">
+            </div>
+            <div class="form-group">
+              <label for="placement">Placement</label>
+              <input type="text" id="placement" name="placement" placeholder="e.g. forearm, upper back">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reference">Reference Image</label>
+            <input type="file" id="reference" name="reference" accept="image/*">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Booking Request</button>
+
+          <div id="book-form-message" class="form-message" style="display: none;"></div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/book-form.js"></script>
+</body>
+</html>
