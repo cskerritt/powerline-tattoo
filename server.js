@@ -111,7 +111,7 @@ pages.forEach(page => {
 });
 
 // Individual artist gallery pages
-const artists = ['evan-olin', 'mike-ledoux', 'mikey-romasco', 'andy-large', 'andrey-vasilyev', 'dj-lebeau', 'dana-morse', 'jake-meo', 'chris-valencia'];
+const artists = ['evan-olin', 'mikey-romasco', 'andy-large', 'andrey-vasilyev', 'dj-lebeau', 'dana-morse', 'jake-meo', 'chris-valencia'];
 artists.forEach(artist => {
   app.get(`/artists/${artist}`, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'artists', `${artist}.html`));
