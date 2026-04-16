@@ -20,12 +20,74 @@
        ============================================= */
 
     .about-story {
-      padding: 6rem 0;
+      padding: 6rem 0 4rem;
     }
 
     .about-location {
       padding: 6rem 0;
       border-top: 1px solid var(--border);
+    }
+
+    /* ---- Inline media blocks that break up the story ---- */
+    .about-media {
+      margin: 4rem auto;
+      max-width: 1100px;
+      padding: 0 1.25rem;
+    }
+
+    .about-media-single img,
+    .about-media-single video {
+      width: 100%;
+      height: auto;
+      max-height: 560px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .about-media-duo {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .about-media-duo img,
+    .about-media-duo video {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .about-media figcaption {
+      font-family: var(--font-heading, 'Montserrat', sans-serif);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted, #999);
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+
+    .about-story-text .about-text {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .about-story-text .about-text p {
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .about-media-duo {
+        grid-template-columns: 1fr;
+      }
+      .about-media-duo img,
+      .about-media-duo video {
+        height: 240px;
+      }
     }
 
     .location-actions {
@@ -138,59 +200,57 @@
     </div>
   </header>
 
-  <!-- Story Section -->
-  <section class="about-story">
+  <!-- Story Section — text interleaved with photos/videos -->
+  <section class="about-story about-story-text">
     <div class="container">
-      <div class="about-content reveal">
-
-        <div class="about-text">
-          <span class="label">The Studio</span>
-          <h2>A Private Studio Built Around You</h2>
-          <p>
-            A tattoo is one of the most powerful forms of personal expression you'll ever commit to — it stays with you for life. At Powerline Tattoo, our mission is simple: deliver the best possible tattoo alongside the best possible experience for every single client.
-          </p>
-          <p>
-            As a private studio, we offer a level of one-on-one attention, comfort, and exclusivity that a typical walk-in shop simply cannot match. We don't keep public hours or accept walk-ins — instead, we've built a streamlined process that makes it easy to reach out, talk through your ideas, and ultimately get the tattoo you've been envisioning.
-          </p>
-          <p>
-            Your journey begins with the tattoo request form on our contact page. That gives us the basics and lets us pair you with the artist best suited to your project. From there, we'll either schedule an in-person consultation or continue refining the details over email. Once the concept is locked in and both artist and client are comfortable, you leave a deposit and book your session.
-          </p>
-          <p>
-            Our staff is a small, hand-picked group of professionals chosen for the excellence they bring to their craft. Powerline artists have earned countless awards and been featured in international publications.
-          </p>
-          <p>
-            You won't find pre-drawn flash hanging on our walls waiting to be picked and stuck. We collaborate with you on the design from the ground up. Bring reference material, bring rough ideas, or come with nothing more than a feeling — we'll work with you no matter how developed your concept is.
-          </p>
-          <a href="/artists" class="btn btn-outline">Meet Our Artists</a>
-        </div>
-
-        <div class="about-image">
-          <img src="/images/shop/shop-01.jpg" alt="Powerline Tattoo reception with reclaimed wood wall and Edison bulb lighting" loading="lazy">
-        </div>
-
+      <div class="about-text reveal">
+        <span class="label">The Studio</span>
+        <h2>A Private Studio Built Around You</h2>
+        <p>
+          A tattoo is one of the most powerful forms of personal expression you'll ever commit to — it stays with you for life. At Powerline Tattoo, our mission is simple: deliver the best possible tattoo alongside the best possible experience for every single client.
+        </p>
+        <p>
+          As a private studio, we offer a level of one-on-one attention, comfort, and exclusivity that a typical walk-in shop simply cannot match. We don't keep public hours or accept walk-ins — instead, we've built a streamlined process that makes it easy to reach out, talk through your ideas, and ultimately get the tattoo you've been envisioning.
+        </p>
       </div>
     </div>
-  </section>
 
-  <!-- Studio Gallery -->
-  <section class="studio-gallery">
+    <!-- Photo break: reception / lobby -->
+    <figure class="about-media about-media-single reveal">
+      <img src="/images/shop/shop-01.jpg" alt="Powerline Tattoo reception with reclaimed wood wall and Edison bulb lighting" loading="lazy">
+    </figure>
+
     <div class="container">
-      <h3>Inside the Studio</h3>
-      <div class="studio-grid reveal">
-        <figure>
-          <img src="/images/shop/shop-02.jpg" alt="Trophy shelf displaying awards and press clippings" loading="lazy">
-          <figcaption>Awards and press recognition</figcaption>
-        </figure>
-        <figure>
-          <img src="/images/shop/shop-03.jpg" alt="Artist workspace with leather couch and framed artwork" loading="lazy">
-          <figcaption>Comfortable client consultation area</figcaption>
-        </figure>
-        <figure>
-          <img src="/images/shop/shop-04.jpg" alt="Clean private tattoo room" loading="lazy">
-          <figcaption>Private tattoo room</figcaption>
-        </figure>
+      <div class="about-text reveal">
+        <p>
+          Your journey begins with the tattoo request form on our contact page. That gives us the basics and lets us pair you with the artist best suited to your project. From there, we'll either schedule an in-person consultation or continue refining the details over email. Once the concept is locked in and both artist and client are comfortable, you leave a deposit and book your session.
+        </p>
       </div>
     </div>
+
+    <!-- Photo break: awards + consultation -->
+    <figure class="about-media about-media-duo reveal">
+      <img src="/images/shop/shop-02.jpg" alt="Trophy shelf displaying awards and press clippings" loading="lazy">
+      <img src="/images/shop/shop-03.jpg" alt="Artist workspace with leather couch and framed artwork" loading="lazy">
+    </figure>
+
+    <div class="container">
+      <div class="about-text reveal">
+        <p>
+          Our staff is a small, hand-picked group of professionals chosen for the excellence they bring to their craft. Powerline artists have earned countless awards and been featured in international publications.
+        </p>
+        <p>
+          You won't find pre-drawn flash hanging on our walls waiting to be picked and stuck. We collaborate with you on the design from the ground up. Bring reference material, bring rough ideas, or come with nothing more than a feeling — we'll work with you no matter how developed your concept is.
+        </p>
+        <a href="/artists" class="btn btn-outline">Meet Our Artists</a>
+      </div>
+    </div>
+
+    <!-- Photo break: studio room -->
+    <figure class="about-media about-media-single reveal">
+      <img src="/images/shop/shop-04.jpg" alt="Clean private tattoo room" loading="lazy">
+      <figcaption>Private tattoo room</figcaption>
+    </figure>
   </section>
 
   <!-- Location Section -->

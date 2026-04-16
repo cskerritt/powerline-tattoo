@@ -437,8 +437,16 @@ h4 {
   inset: 0;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
   will-change: transform;
+}
+
+/* iOS/iPadOS ignore background-attachment: fixed, which breaks hero sizing.
+   Only enable the parallax effect on true desktop pointers. */
+@media (hover: hover) and (pointer: fine) {
+  .hero-bg {
+    background-attachment: fixed;
+  }
 }
 
 .hero-bg::after {
@@ -1628,10 +1636,6 @@ h4 {
     padding-block: 4rem;
   }
 
-  /* Hero */
-  .hero-bg {
-    background-attachment: scroll;
-  }
 }
 
 /* =============================================================================
@@ -1677,8 +1681,4 @@ h4 {
     align-items: center;
   }
 
-  /* Hero bg */
-  .hero-bg {
-    background-attachment: scroll;
-  }
 }
