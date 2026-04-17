@@ -147,7 +147,36 @@
     '  z-index: 10;',
     '}',
     '.behold-lightbox-prev { left: 8px; }',
-    '.behold-lightbox-next { right: 8px; }'
+    '.behold-lightbox-next { right: 8px; }',
+    '.behold-lightbox video {',
+    '  max-width: 90vw;',
+    '  max-height: 90vh;',
+    '  border-radius: 4px;',
+    '}',
+    '.behold-feed-item .behold-play-icon {',
+    '  position: absolute;',
+    '  top: 50%;',
+    '  left: 50%;',
+    '  transform: translate(-50%, -50%);',
+    '  width: 48px;',
+    '  height: 48px;',
+    '  background: rgba(0,0,0,0.6);',
+    '  border-radius: 50%;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: center;',
+    '  pointer-events: none;',
+    '}',
+    '.behold-feed-item .behold-play-icon::after {',
+    '  content: "";',
+    '  display: block;',
+    '  width: 0;',
+    '  height: 0;',
+    '  border-style: solid;',
+    '  border-width: 10px 0 10px 18px;',
+    '  border-color: transparent transparent transparent #fff;',
+    '  margin-left: 4px;',
+    '}'
   ].join('\n');
   document.head.appendChild(style);
 
@@ -157,27 +186,34 @@
   lightboxEl.innerHTML =
     '<button class="behold-lightbox-close" aria-label="Close">&times;</button>' +
     '<button class="behold-lightbox-nav behold-lightbox-prev" aria-label="Previous">&#8592;</button>' +
-    '<img src="" alt="Instagram post">' +
+    '<div class="behold-lightbox-media"></div>' +
     '<button class="behold-lightbox-nav behold-lightbox-next" aria-label="Next">&#8594;</button>';
   document.body.appendChild(lightboxEl);
 
-  var lbImg = lightboxEl.querySelector('img');
+  var lbMedia = lightboxEl.querySelector('.behold-lightbox-media');
   var lbClose = lightboxEl.querySelector('.behold-lightbox-close');
   var lbPrev = lightboxEl.querySelector('.behold-lightbox-prev');
   var lbNext = lightboxEl.querySelector('.behold-lightbox-next');
-  var allImages = []; // [{src, alt}]
+  var allMedia = []; // [{src, alt, type: 'image'|'video'}]
   var currentIdx = 0;
 
   function openLightbox(idx) {
     currentIdx = idx;
-    lbImg.src = allImages[idx].src;
-    lbImg.alt = allImages[idx].alt;
+    var item = allMedia[idx];
+    if (item.type === 'video') {
+      lbMedia.innerHTML = '<video src="' + item.src + '" controls autoplay playsinline style="max-width:90vw;max-height:90vh;border-radius:4px;"></video>';
+    } else {
+      lbMedia.innerHTML = '<img src="' + item.src + '" alt="' + (item.alt || 'Instagram post').replace(/"/g, '&quot;') + '" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;">';
+    }
     lightboxEl.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
   function closeLightbox() {
     lightboxEl.classList.remove('active');
     document.body.style.overflow = '';
+    // Stop any playing video
+    var vid = lbMedia.querySelector('video');
+    if (vid) vid.pause();
   }
   function navigate(dir) {
     currentIdx = (currentIdx + dir + allImages.length) % allImages.length;
@@ -246,28 +282,33 @@
 
         posts.forEach(function (post, i) {
           var sizes = post.sizes || {};
+          var isVideo = post.mediaType === 'VIDEO';
           var thumbUrl = (sizes.medium && sizes.medium.mediaUrl)
             || (sizes.small && sizes.small.mediaUrl)
             || post.thumbnailUrl
             || '';
-          // Use largest available for lightbox
-          var fullUrl = (sizes.large && sizes.large.mediaUrl)
+          // For videos, use the video URL for the lightbox
+          var videoUrl = post.mediaUrl || post.videoUrl || '';
+          // For images, use largest available for lightbox
+          var fullUrl = isVideo ? videoUrl : (
+            (sizes.large && sizes.large.mediaUrl)
             || (sizes.original && sizes.original.mediaUrl)
             || (sizes.medium && sizes.medium.mediaUrl)
-            || thumbUrl;
+            || thumbUrl
+          );
           var altText = post.caption ? post.caption.substring(0, 100) : 'Instagram post';
 
           if (!thumbUrl) return;
 
-          // Register in global images array
-          allImages.push({ src: fullUrl, alt: altText });
+          // Register in global media array
+          allMedia.push({ src: fullUrl, alt: altText, type: isVideo ? 'video' : 'image' });
           var imgIndex = startIndex + i;
 
           var item = document.createElement('div');
           item.className = 'behold-feed-item';
           item.setAttribute('role', 'button');
           item.setAttribute('tabindex', '0');
-          item.setAttribute('aria-label', 'View image: ' + altText);
+          item.setAttribute('aria-label', (isVideo ? 'Play video: ' : 'View image: ') + altText);
 
           var img = document.createElement('img');
           img.src = thumbUrl;
@@ -275,6 +316,14 @@
           img.loading = 'lazy';
 
           item.appendChild(img);
+
+          // Add play icon overlay for videos
+          if (isVideo) {
+            var playIcon = document.createElement('div');
+            playIcon.className = 'behold-play-icon';
+            item.appendChild(playIcon);
+          }
+
           item.addEventListener('click', (function (idx) {
             return function () { openLightbox(idx); };
           })(imgIndex));
