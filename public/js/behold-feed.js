@@ -216,7 +216,7 @@
     if (vid) vid.pause();
   }
   function navigate(dir) {
-    currentIdx = (currentIdx + dir + allImages.length) % allImages.length;
+    currentIdx = (currentIdx + dir + allMedia.length) % allMedia.length;
     openLightbox(currentIdx);
   }
 
@@ -277,8 +277,8 @@
         if (cols === '3') grid.className += ' behold-cols-3';
         if (cols === '2') grid.className += ' behold-cols-2';
 
-        // Track starting index in global allImages for this feed
-        var startIndex = allImages.length;
+        // Track starting index in global allMedia for this feed
+        var startIndex = allMedia.length;
 
         posts.forEach(function (post, i) {
           var sizes = post.sizes || {};
