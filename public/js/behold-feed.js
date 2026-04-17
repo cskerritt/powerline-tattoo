@@ -1,7 +1,12 @@
 /**
  * Behold Instagram Feed Integration
  * Fetches and renders Instagram posts from Behold's API.
- * Usage: Add a <div class="behold-feed" data-behold-id="FEED_ID" data-behold-count="8"></div>
+ * Clicking a thumbnail opens a lightbox (stays on the website).
+ *
+ * Usage: <div class="behold-feed" data-behold-id="FEED_ID" data-behold-count="8"></div>
+ * Options:
+ *   data-behold-count   — max posts to show (default 8)
+ *   data-behold-columns — grid columns: 2, 3, or 4 (default 4)
  */
 (function () {
   'use strict';
@@ -14,50 +19,30 @@
     '  grid-template-columns: repeat(4, 1fr);',
     '  gap: 8px;',
     '}',
-    '.behold-feed-grid a {',
+    '.behold-feed-grid.behold-cols-3 {',
+    '  grid-template-columns: repeat(3, 1fr);',
+    '}',
+    '.behold-feed-grid.behold-cols-2 {',
+    '  grid-template-columns: repeat(2, 1fr);',
+    '}',
+    '.behold-feed-item {',
     '  position: relative;',
     '  display: block;',
     '  overflow: hidden;',
     '  border-radius: 4px;',
     '  aspect-ratio: 1;',
     '  background: var(--bg-card, #111);',
+    '  cursor: pointer;',
     '}',
-    '.behold-feed-grid a img {',
+    '.behold-feed-item img {',
     '  width: 100%;',
     '  height: 100%;',
     '  object-fit: cover;',
     '  display: block;',
     '  transition: transform 0.4s ease;',
     '}',
-    '.behold-feed-grid a:hover img {',
+    '.behold-feed-item:hover img {',
     '  transform: scale(1.05);',
-    '}',
-    '.behold-feed-grid a::after {',
-    '  content: "";',
-    '  position: absolute;',
-    '  inset: 0;',
-    '  background: rgba(0,0,0,0.5);',
-    '  opacity: 0;',
-    '  transition: opacity 0.3s ease;',
-    '  display: flex;',
-    '  align-items: center;',
-    '  justify-content: center;',
-    '}',
-    '.behold-feed-grid a:hover::after {',
-    '  opacity: 1;',
-    '}',
-    '.behold-feed-grid a .behold-ig-icon {',
-    '  position: absolute;',
-    '  top: 50%;',
-    '  left: 50%;',
-    '  transform: translate(-50%, -50%);',
-    '  z-index: 2;',
-    '  opacity: 0;',
-    '  transition: opacity 0.3s ease;',
-    '  pointer-events: none;',
-    '}',
-    '.behold-feed-grid a:hover .behold-ig-icon {',
-    '  opacity: 1;',
     '}',
     '.behold-feed-loading {',
     '  display: flex;',
@@ -106,25 +91,116 @@
     '}',
     '@media (max-width: 1024px) {',
     '  .behold-feed-grid { grid-template-columns: repeat(3, 1fr); }',
+    '  .behold-feed-grid.behold-cols-3 { grid-template-columns: repeat(3, 1fr); }',
+    '  .behold-feed-grid.behold-cols-2 { grid-template-columns: repeat(2, 1fr); }',
     '}',
     '@media (max-width: 640px) {',
     '  .behold-feed-grid { grid-template-columns: repeat(2, 1fr); }',
-    '}'
+    '  .behold-feed-grid.behold-cols-3 { grid-template-columns: repeat(2, 1fr); }',
+    '}',
+    '',
+    '/* Behold lightbox */',
+    '.behold-lightbox {',
+    '  position: fixed;',
+    '  inset: 0;',
+    '  z-index: 9999;',
+    '  background: rgba(0,0,0,0.92);',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: center;',
+    '  opacity: 0;',
+    '  pointer-events: none;',
+    '  transition: opacity 0.3s ease;',
+    '}',
+    '.behold-lightbox.active {',
+    '  opacity: 1;',
+    '  pointer-events: auto;',
+    '}',
+    '.behold-lightbox img {',
+    '  max-width: 90vw;',
+    '  max-height: 90vh;',
+    '  object-fit: contain;',
+    '  border-radius: 4px;',
+    '}',
+    '.behold-lightbox-close {',
+    '  position: absolute;',
+    '  top: 20px;',
+    '  right: 24px;',
+    '  background: none;',
+    '  border: none;',
+    '  color: #fff;',
+    '  font-size: 2.5rem;',
+    '  cursor: pointer;',
+    '  line-height: 1;',
+    '  z-index: 10;',
+    '}',
+    '.behold-lightbox-nav {',
+    '  position: absolute;',
+    '  top: 50%;',
+    '  transform: translateY(-50%);',
+    '  background: none;',
+    '  border: none;',
+    '  color: #fff;',
+    '  font-size: 2.5rem;',
+    '  cursor: pointer;',
+    '  padding: 20px;',
+    '  z-index: 10;',
+    '}',
+    '.behold-lightbox-prev { left: 8px; }',
+    '.behold-lightbox-next { right: 8px; }'
   ].join('\n');
   document.head.appendChild(style);
 
-  // Instagram SVG icon (white, 24x24)
-  var igIconSvg = '<svg class="behold-ig-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-    '<rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="1.5"/>' +
-    '<circle cx="12" cy="12" r="5" stroke="white" stroke-width="1.5"/>' +
-    '<circle cx="17.5" cy="6.5" r="1" fill="white"/>' +
-    '</svg>';
+  // Build shared lightbox element
+  var lightboxEl = document.createElement('div');
+  lightboxEl.className = 'behold-lightbox';
+  lightboxEl.innerHTML =
+    '<button class="behold-lightbox-close" aria-label="Close">&times;</button>' +
+    '<button class="behold-lightbox-nav behold-lightbox-prev" aria-label="Previous">&#8592;</button>' +
+    '<img src="" alt="Instagram post">' +
+    '<button class="behold-lightbox-nav behold-lightbox-next" aria-label="Next">&#8594;</button>';
+  document.body.appendChild(lightboxEl);
+
+  var lbImg = lightboxEl.querySelector('img');
+  var lbClose = lightboxEl.querySelector('.behold-lightbox-close');
+  var lbPrev = lightboxEl.querySelector('.behold-lightbox-prev');
+  var lbNext = lightboxEl.querySelector('.behold-lightbox-next');
+  var allImages = []; // [{src, alt}]
+  var currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    lbImg.src = allImages[idx].src;
+    lbImg.alt = allImages[idx].alt;
+    lightboxEl.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightboxEl.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function navigate(dir) {
+    currentIdx = (currentIdx + dir + allImages.length) % allImages.length;
+    openLightbox(currentIdx);
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightboxEl.addEventListener('click', function (e) { if (e.target === lightboxEl) closeLightbox(); });
+  lbPrev.addEventListener('click', function (e) { e.stopPropagation(); navigate(-1); });
+  lbNext.addEventListener('click', function (e) { e.stopPropagation(); navigate(1); });
+  document.addEventListener('keydown', function (e) {
+    if (!lightboxEl.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
 
   function initFeed(container) {
     var feedId = container.getAttribute('data-behold-id');
     if (!feedId) return;
 
     var maxPosts = parseInt(container.getAttribute('data-behold-count'), 10) || 8;
+    var cols = container.getAttribute('data-behold-columns');
 
     // Show loading state
     container.innerHTML = '<div class="behold-feed-loading"><div class="behold-spinner"></div>Loading Instagram feed...</div>';
@@ -137,7 +213,6 @@
       .then(function (data) {
         var posts = [];
 
-        // Behold API may return posts in different structures
         if (Array.isArray(data)) {
           posts = data;
         } else if (data && Array.isArray(data.posts)) {
@@ -145,7 +220,6 @@
         } else if (data && Array.isArray(data.media)) {
           posts = data.media;
         } else {
-          // Try to find an array property
           var keys = Object.keys(data || {});
           for (var i = 0; i < keys.length; i++) {
             if (Array.isArray(data[keys[i]]) && data[keys[i]].length > 0) {
@@ -164,44 +238,58 @@
 
         var grid = document.createElement('div');
         grid.className = 'behold-feed-grid';
+        if (cols === '3') grid.className += ' behold-cols-3';
+        if (cols === '2') grid.className += ' behold-cols-2';
 
-        posts.forEach(function (post) {
+        // Track starting index in global allImages for this feed
+        var startIndex = allImages.length;
+
+        posts.forEach(function (post, i) {
           var sizes = post.sizes || {};
-          var imageUrl = (sizes.medium && sizes.medium.mediaUrl)
-            || (sizes.large && sizes.large.mediaUrl)
+          var thumbUrl = (sizes.medium && sizes.medium.mediaUrl)
             || (sizes.small && sizes.small.mediaUrl)
             || post.thumbnailUrl
             || '';
-          var permalink = post.permalink || post.postUrl || '#';
+          // Use largest available for lightbox
+          var fullUrl = (sizes.large && sizes.large.mediaUrl)
+            || (sizes.original && sizes.original.mediaUrl)
+            || (sizes.medium && sizes.medium.mediaUrl)
+            || thumbUrl;
+          var altText = post.caption ? post.caption.substring(0, 100) : 'Instagram post';
 
-          if (!imageUrl) return;
+          if (!thumbUrl) return;
 
-          var link = document.createElement('a');
-          link.href = permalink;
-          link.target = '_blank';
-          link.rel = 'noopener';
-          link.setAttribute('aria-label', 'View post on Instagram');
+          // Register in global images array
+          allImages.push({ src: fullUrl, alt: altText });
+          var imgIndex = startIndex + i;
+
+          var item = document.createElement('div');
+          item.className = 'behold-feed-item';
+          item.setAttribute('role', 'button');
+          item.setAttribute('tabindex', '0');
+          item.setAttribute('aria-label', 'View image: ' + altText);
 
           var img = document.createElement('img');
-          img.src = imageUrl;
-          img.alt = post.caption ? post.caption.substring(0, 100) : 'Instagram post';
+          img.src = thumbUrl;
+          img.alt = altText;
           img.loading = 'lazy';
 
-          link.appendChild(img);
-          link.insertAdjacentHTML('beforeend', igIconSvg);
-          grid.appendChild(link);
+          item.appendChild(img);
+          item.addEventListener('click', (function (idx) {
+            return function () { openLightbox(idx); };
+          })(imgIndex));
+
+          grid.appendChild(item);
         });
 
         container.innerHTML = '';
         container.appendChild(grid);
       })
       .catch(function () {
-        // Fail silently — just remove loading state
         container.innerHTML = '';
       });
   }
 
-  // Initialize all feed containers on the page
   function init() {
     var containers = document.querySelectorAll('.behold-feed[data-behold-id]');
     containers.forEach(initFeed);
