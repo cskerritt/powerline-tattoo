@@ -43,12 +43,12 @@ function initLightbox() {
     lightboxImg.src = item.querySelector('img').src;
     lightboxArtist.textContent = item.dataset.artist || '';
     lightboxStyle.textContent = item.dataset.style || '';
-    lightbox.classList.add('open');
+    lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
-    lightbox.classList.remove('open');
+    lightbox.classList.remove('active');
     document.body.style.overflow = '';
   }
 
@@ -81,7 +81,7 @@ function initLightbox() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
+    if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') navigate(-1);
     if (e.key === 'ArrowRight') navigate(1);
