@@ -40,7 +40,9 @@ function initLightbox() {
     if (index < 0 || index >= visible.length) return;
     currentIndex = index;
     const item = visible[index];
-    lightboxImg.src = item.querySelector('img').src;
+    const img = item.querySelector('img');
+    // Grid shows a small thumbnail; load the full-resolution original here.
+    lightboxImg.src = img.dataset.full || img.src;
     lightboxArtist.textContent = item.dataset.artist || '';
     lightboxStyle.textContent = item.dataset.style || '';
     lightbox.classList.add('active');
