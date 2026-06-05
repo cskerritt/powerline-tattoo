@@ -87,9 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Insert footer at end of body
   document.body.insertAdjacentHTML('beforeend', getFooterHTML());
 
+  // Scroll progress bar
+  document.body.insertAdjacentHTML('afterbegin', '<div class="scroll-progress" id="scroll-progress"></div>');
+
   initMobileMenu();
   initScrollNav();
   initScrollReveal();
+  initScrollProgress();
+  initStatCounters();
+
+  // Page-load fade-in
+  requestAnimationFrame(() => document.body.classList.add('loaded'));
 });
 
 // --- Mobile Menu ---
@@ -129,6 +137,62 @@ function initScrollNav() {
 
   window.addEventListener('scroll', checkScroll, { passive: true });
   checkScroll();
+}
+
+// --- Scroll Progress Bar ---
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+
+  function update() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+}
+
+// --- Animated Stat Counters ---
+function initStatCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  if (!counters.length) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animate(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    if (prefersReduced) {
+      el.textContent = target.toLocaleString() + suffix;
+      return;
+    }
+    const duration = 1600;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      el.textContent = value.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => observer.observe(el));
 }
 
 // --- Scroll Reveal ---

@@ -28,6 +28,7 @@ function initLightbox() {
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxArtist = document.getElementById('lightbox-artist');
   const lightboxStyle = document.getElementById('lightbox-style');
+  const lightboxCounter = document.getElementById('lightbox-counter');
   const items = document.querySelectorAll('.masonry-item');
   let currentIndex = 0;
 
@@ -42,9 +43,20 @@ function initLightbox() {
     const item = visible[index];
     const img = item.querySelector('img');
     // Grid shows a small thumbnail; load the full-resolution original here.
-    lightboxImg.src = img.dataset.full || img.src;
+    const fullSrc = img.dataset.full || img.src;
+
+    // Cross-fade: briefly hide, swap once loaded, then fade back in.
+    lightboxImg.classList.add('swapping');
+    const loader = new Image();
+    loader.onload = () => {
+      lightboxImg.src = fullSrc;
+      lightboxImg.classList.remove('swapping');
+    };
+    loader.src = fullSrc;
+
     lightboxArtist.textContent = item.dataset.artist || '';
     lightboxStyle.textContent = item.dataset.style || '';
+    if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${visible.length}`;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -88,4 +100,14 @@ function initLightbox() {
     if (e.key === 'ArrowLeft') navigate(-1);
     if (e.key === 'ArrowRight') navigate(1);
   });
+
+  // Swipe support (mobile)
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+  }, { passive: true });
 }

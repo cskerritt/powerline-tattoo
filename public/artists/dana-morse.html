@@ -118,6 +118,7 @@
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+    <div class="lightbox-counter" id="lightbox-counter"></div>
     <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
     <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8592;</button>
     <div class="lightbox-content">
@@ -127,31 +128,6 @@
   </div>
 
   <script src="/js/main.js"></script>
-  <script>
-    const items = document.querySelectorAll('.portfolio-item');
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    const lbClose = document.getElementById('lightbox-close');
-    const lbPrev = document.getElementById('lightbox-prev');
-    const lbNext = document.getElementById('lightbox-next');
-    let currentIdx = 0;
-    const srcs = Array.from(items).map(i => i.querySelector('img').src);
-
-    items.forEach((item, i) => {
-      item.addEventListener('click', () => { currentIdx = i; showLightbox(); });
-    });
-    function showLightbox() { lbImg.src = srcs[currentIdx]; lightbox.classList.add('active'); }
-    function hideLightbox() { lightbox.classList.remove('active'); }
-    lbClose.addEventListener('click', hideLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) hideLightbox(); });
-    lbPrev.addEventListener('click', () => { currentIdx = (currentIdx - 1 + srcs.length) % srcs.length; showLightbox(); });
-    lbNext.addEventListener('click', () => { currentIdx = (currentIdx + 1) % srcs.length; showLightbox(); });
-    document.addEventListener('keydown', e => {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') hideLightbox();
-      if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + srcs.length) % srcs.length; showLightbox(); }
-      if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % srcs.length; showLightbox(); }
-    });
-  </script>
+  <script src="/js/artist-portfolio.js"></script>
 </body>
 </html>
