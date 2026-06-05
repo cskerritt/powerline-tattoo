@@ -43,21 +43,64 @@ function createTransporter() {
   });
 }
 
-// POST /api/contact — Contact form
-app.post('/api/contact', async (req, res) => {
-  const { name, email, message } = req.body;
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'All fields are required.' });
+// POST /api/contact — Tattoo request form (multipart: up to 3 placement + 5 reference photos)
+const contactUpload = upload.fields([
+  { name: 'placementPhotos', maxCount: 3 },
+  { name: 'referenceImages', maxCount: 5 }
+]);
+
+app.post('/api/contact', contactUpload, async (req, res) => {
+  const b = req.body;
+
+  // Normalize the "How did you hear about us?" checkbox group to an array
+  let hearAbout = b.hearAbout || [];
+  if (!Array.isArray(hearAbout)) hearAbout = [hearAbout];
+
+  const required = ['name', 'email', 'phone', 'subject', 'description', 'artist', 'colorOrBw', 'spamAck'];
+  const missing = required.filter(k => !b[k] || !String(b[k]).trim());
+  if (hearAbout.length === 0) missing.push('hearAbout');
+  if (missing.length) {
+    return res.status(400).json({ error: 'Please fill in all required fields.' });
   }
 
   try {
     const transporter = createTransporter();
+    const files = req.files || {};
+    const attachments = [...(files.placementPhotos || []), ...(files.referenceImages || [])]
+      .map(f => ({ filename: f.originalname, content: f.buffer }));
+
+    let heardLine = hearAbout.join(', ');
+    if (b.hearAboutOther && b.hearAboutOther.trim()) heardLine += ` — ${b.hearAboutOther.trim()}`;
+
+    const text = [
+      `Name: ${b.name}`,
+      `Email: ${b.email}`,
+      `Phone: ${b.phone}`,
+      `Subject: ${b.subject}`,
+      `Preferred Artist: ${b.artist}`,
+      `Color or Black & Grey: ${b.colorOrBw}`,
+      `Skin Tone: ${b.skinTone || 'Not provided'}`,
+      `Body Area: ${b.bodyArea || 'Not provided'}`,
+      '',
+      'Tattoo Description:',
+      b.description,
+      '',
+      `Conflicts in area: ${b.areaConflicts || 'None provided'}`,
+      `Other design specifics: ${b.designSpecifics || 'None provided'}`,
+      `Process / health specifics: ${b.processSpecifics || 'None provided'}`,
+      `Schedule flexibility: ${b.scheduleFlexibility || 'None provided'}`,
+      `How did you hear about us: ${heardLine}`,
+      `Spam-folder acknowledgment: ${b.spamAck}`,
+      `Attachments: ${attachments.length}`
+    ].join('\n');
+
     await transporter.sendMail({
       from: `"Powerline Tattoo Website" <${process.env.SMTP_USER}>`,
       to: 'powerlinetattoo@gmail.com',
-      replyTo: email,
-      subject: `Contact Form: ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`
+      replyTo: b.email,
+      subject: `Tattoo Request: ${b.name} — ${b.subject}`,
+      text,
+      attachments
     });
     res.json({ success: true });
   } catch (err) {
