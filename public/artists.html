@@ -148,6 +148,7 @@
       aspect-ratio: 1;
       object-fit: cover;
       border-radius: 2px;
+      cursor: pointer;
       transition: opacity var(--transition);
     }
 
@@ -362,7 +363,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Evan</a>
               <a href="/artists/evan-olin" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/evanolintattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@evanolintattoo</a>
+              <a href="https://instagram.com/evanolintattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -399,7 +400,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Mikey</a>
               <a href="/artists/mikey-romasco" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/mikeyffresh" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@mikeyffresh</a>
+              <a href="https://instagram.com/mikeyffresh" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -436,7 +437,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Andy</a>
               <a href="/artists/andy-large" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/andylargetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@andylargetattoo</a>
+              <a href="https://instagram.com/andylargetattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -473,7 +474,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Andrey</a>
               <a href="/artists/andrey-vasilyev" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/andreytattooing" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@andreytattooing</a>
+              <a href="https://instagram.com/andreytattooing" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -510,7 +511,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book DJ</a>
               <a href="/artists/dj-lebeau" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/artworkby_dj" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@artworkby_dj</a>
+              <a href="https://instagram.com/artworkby_dj" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -547,7 +548,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Dana</a>
               <a href="/artists/dana-morse" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/danamorsetattoos" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@danamorsetattoos</a>
+              <a href="https://instagram.com/danamorsetattoos" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -584,7 +585,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Jake</a>
               <a href="/artists/jake-meo" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/jakemeotattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@jakemeotattoo</a>
+              <a href="https://instagram.com/jakemeotattoo" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -621,7 +622,7 @@
             <div class="artist-links">
               <a href="/book" class="btn btn-primary" onclick="event.stopPropagation()">Book Chris</a>
               <a href="/artists/chris-valencia" class="btn btn-outline" onclick="event.stopPropagation()">Full Portfolio</a>
-              <a href="https://instagram.com/cvalencia7" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">@cvalencia7</a>
+              <a href="https://instagram.com/cvalencia7" target="_blank" rel="noopener" class="btn btn-outline" onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </article>
@@ -682,6 +683,18 @@
         card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
+
+    // Clicking a portfolio thumbnail opens that artist's gallery page.
+    // The artist slug is derived from the image path: /images/gallery/<slug>/...
+    document.querySelectorAll('.artist-gallery img').forEach(img => {
+      const match = img.getAttribute('src').match(/\/images\/gallery\/([^/]+)\//);
+      if (!match) return;
+      const slug = match[1];
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.location.href = '/artists/' + slug;
+      });
+    });
   </script>
 </body>
 </html>
