@@ -33,6 +33,12 @@
       .artist-hero-info .artist-links { justify-content: center; }
       .portfolio-grid { columns: 2; }
     }
+  
+    /* --- Meet the Artist video --- */
+    .video-section { padding: 0 0 20px; }
+    .video-section .video-heading { font-family: var(--font-heading); font-weight: 700; font-size: 1.6rem; margin-bottom: 20px; text-align: center; }
+    .video-embed { position: relative; width: 100%; max-width: 800px; margin: 0 auto; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   </style>
 </head>
 <body data-page="artists">
@@ -54,6 +60,16 @@
   </section>
 
   <!-- Portfolio (auto-updated from Instagram) -->
+  <!-- Meet the Artist -->
+  <section class="video-section">
+    <div class="container">
+      <h2 class="video-heading">Meet Jake</h2>
+      <div class="video-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/QLaUVcjEXb0" title="Meet Jake Meo — Powerline Tattoo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
   <section class="portfolio-section">
     <div class="container">
       <div class="portfolio-grid">
