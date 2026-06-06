@@ -12,7 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const lbNext = document.getElementById('lightbox-next');
   const lbCounter = document.getElementById('lightbox-counter');
   const items = Array.from(document.querySelectorAll('.portfolio-item'));
-  const srcs = items.map(i => i.querySelector('img').src);
+  // Grid shows small thumbnails; the lightbox loads the full-resolution original.
+  const srcs = items.map(i => {
+    const img = i.querySelector('img');
+    return img.dataset.full || img.src;
+  });
   let currentIdx = 0;
 
   function showLightbox() {
