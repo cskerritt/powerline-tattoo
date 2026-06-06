@@ -1845,3 +1845,35 @@ body.loaded {
   .lightbox.active .lightbox-img { transform: none; }
   .lightbox-img.swapping { transform: none; }
 }
+
+/* --- Google reviews (testimonials) --- */
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.testimonial-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.testimonial-name {
+  font-weight: 600;
+  color: var(--text);
+}
+.testimonial-time {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+.testimonials-attribution {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 2.5rem;
+}
+.testimonials-attribution a {
+  color: var(--accent);
+}

@@ -50,32 +50,6 @@
       "https://www.instagram.com/powerlinetattoo",
       "https://www.instagram.com/evanolintattoo"
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "312",
-      "bestRating": "5"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "author": {"@type": "Person", "name": "Mike R."},
-        "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-        "reviewBody": "I drove two hours to get tattooed at Powerline and I'd do it again in a heartbeat. The artist took my rough idea and turned it into something beyond what I imagined."
-      },
-      {
-        "@type": "Review",
-        "author": {"@type": "Person", "name": "Sarah T."},
-        "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-        "reviewBody": "I was nervous about getting my first tattoo but the whole team made me feel completely at ease. This is the only shop I'll go to."
-      },
-      {
-        "@type": "Review",
-        "author": {"@type": "Person", "name": "James D."},
-        "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-        "reviewBody": "I've been tattooed at shops across New England and Powerline is a cut above. Professional, clean, and the artists genuinely care about doing exceptional work."
-      }
-    ],
     "employee": [
       {"@type": "Person", "name": "Evan Olin", "jobTitle": "Owner & Lead Artist", "sameAs": "https://www.instagram.com/evanolintattoo"},
       {"@type": "Person", "name": "Mikey Romasco", "jobTitle": "Tattoo Artist", "sameAs": "https://www.instagram.com/mikeyffresh"},
@@ -226,7 +200,7 @@
         <p>Don't take our word for it — hear from people who've been in the chair.</p>
       </div>
 
-      <div class="testimonials-grid">
+      <div class="testimonials-grid" id="testimonials-grid">
         <div class="testimonial reveal">
           <div class="testimonial-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <p>"I drove two hours to get tattooed at Powerline and I'd do it again in a heartbeat. The artist took my rough idea and turned it into something beyond what I imagined. Clean lines, perfect shading, and healed beautifully."</p>
@@ -243,6 +217,7 @@
           <div class="testimonial-author">James D.</div>
         </div>
       </div>
+      <p id="testimonials-attribution" class="testimonials-attribution" style="display: none;"></p>
     </div>
   </section>
 
@@ -323,5 +298,6 @@
   </section>
 
   <script src="/js/main.js"></script>
+  <script src="/js/testimonials.js"></script>
 </body>
 </html>
