@@ -1173,51 +1173,6 @@ textarea:focus-visible {
 }
 
 /* =============================================================================
-   18. TESTIMONIALS
-   ============================================================================= */
-
-.testimonials {
-  background-color: var(--bg-card);
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.75rem;
-}
-
-.testimonial {
-  padding: 1.75rem;
-  border-left: 3px solid var(--accent);
-  background-color: var(--bg);
-  border-radius: 0 4px 4px 0;
-}
-
-.testimonial p {
-  color: var(--text-muted);
-  font-size: 0.9375rem;
-  line-height: 1.75;
-  margin-bottom: 1.25rem;
-  font-style: italic;
-}
-
-.testimonial-author {
-  font-family: var(--font-heading);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-
-.testimonial-rating {
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-  font-size: 0.875rem;
-  letter-spacing: 0.1em;
-}
-
-/* =============================================================================
    19. LOCATION CARD
    ============================================================================= */
 
@@ -1912,25 +1867,3 @@ body {
   .lightbox-img.swapping { transform: none; }
 }
 
-/* --- Google reviews (testimonials) --- */
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-.testimonial-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.testimonial-name {
-  font-weight: 600;
-  color: var(--text);
-}
-.testimonial-time {
-  color: var(--text-muted);
-  font-size: 0.8125rem;
-}
