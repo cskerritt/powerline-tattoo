@@ -2,6 +2,11 @@
 // POWERLINE TATTOO — MAIN JS
 // ============================================
 
+// Mark that JS is running so CSS can enable the scroll-reveal animation.
+// If this file fails to load, the class is never added and all .reveal
+// content stays visible (no blank page).
+document.documentElement.classList.add('reveal-on');
+
 // --- Nav HTML ---
 function getNavHTML(activePage) {
   const links = [
@@ -18,6 +23,7 @@ function getNavHTML(activePage) {
   ).join('');
 
   return `
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <nav class="nav" id="main-nav">
       <div class="nav-inner">
         <a href="/" class="nav-logo"><img src="/images/logo/powerline-logo.png" alt="Powerline Tattoo" style="height: 50px;"></a>
@@ -62,7 +68,7 @@ function getFooterHTML() {
           <div class="footer-col">
             <h4>Contact</h4>
             <a href="tel:4013697771">401-369-7771</a>
-            <a href="mailto:powerlinetattoo@gmail.com">powerlinetattoo@gmail.com</a>
+            <a href="mailto:info@powerlinetattoo.com">info@powerlinetattoo.com</a>
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px;">706 Reservoir Ave<br>Cranston, RI 02910</p>
           </div>
         </div>
@@ -90,6 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Scroll progress bar
   document.body.insertAdjacentHTML('afterbegin', '<div class="scroll-progress" id="scroll-progress"></div>');
 
+  // Give the first real content block a target for the skip-to-content link.
+  const mainContent = Array.from(document.body.children)
+    .find(el => el.matches('header, main, section') && !el.classList.contains('nav'));
+  if (mainContent) {
+    if (!mainContent.id) mainContent.id = 'main-content';
+    mainContent.setAttribute('tabindex', '-1');
+  }
+
   initMobileMenu();
   initScrollNav();
   initScrollReveal();
@@ -106,19 +120,29 @@ function initMobileMenu() {
   const overlay = document.getElementById('nav-overlay');
   if (!hamburger || !overlay) return;
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
-  });
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-controls', 'nav-overlay');
+
+  function setOpen(open) {
+    hamburger.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => setOpen(!overlay.classList.contains('open')));
 
   // Close on link click
   overlay.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  // Close on Escape and return focus to the toggle.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      setOpen(false);
+      hamburger.focus();
+    }
   });
 }
 

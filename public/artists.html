@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tattoo Artists in Cranston RI | Realism, Traditional, Neo-Trad — Powerline Tattoo</title>
-  <meta name="description" content="Meet the artists at Powerline Tattoo in Cranston, RI. 9 talented tattoo artists specializing in realism, neo-traditional, American traditional, black & grey, and more.">
+  <meta name="description" content="Meet the artists at Powerline Tattoo in Cranston, RI. 8 talented tattoo artists specializing in realism, neo-traditional, American traditional, black & grey, and more.">
   <meta property="og:title" content="Artists — Powerline Tattoo">
-  <meta property="og:description" content="Meet our 9 talented tattoo artists. Each with a distinct voice and commitment to exceptional work.">
-  <meta property="og:image" content="/images/shop/shop-01.jpg">
+  <meta property="og:description" content="Meet our 8 talented tattoo artists. Each with a distinct voice and commitment to exceptional work.">
+  <meta property="og:image" content="https://powerlinetattoo.com/images/shop/shop-01.jpg">
+  <meta property="og:url" content="https://powerlinetattoo.com/artists">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Artists — Powerline Tattoo">
+  <meta name="twitter:description" content="Meet our 8 talented tattoo artists. Each with a distinct voice and commitment to exceptional work.">
+  <meta name="twitter:image" content="https://powerlinetattoo.com/images/shop/shop-01.jpg">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -347,6 +353,7 @@
   <!-- Artists Grid -->
   <section class="artists-section">
     <div class="container">
+      <h2 class="sr-only">Our Tattoo Artists</h2>
       <div class="artists-grid">
 
         <!-- Artist 1: Evan Olin -->
@@ -697,13 +704,39 @@
   <script>
     function toggleArtist(card) {
       const expanded = card.querySelector('.artist-expanded');
+      const hint = card.querySelector('.artist-toggle-hint');
       const wasOpen = expanded.classList.contains('open');
-      document.querySelectorAll('.artist-expanded.open').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.artist-expanded.open').forEach(el => {
+        el.classList.remove('open');
+        const c = el.closest('.artist-card');
+        const h = c && c.querySelector('.artist-toggle-hint');
+        if (h) h.setAttribute('aria-expanded', 'false');
+      });
       if (!wasOpen) {
         expanded.classList.add('open');
+        if (hint) hint.setAttribute('aria-expanded', 'true');
         card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
+
+    // Make the "View Profile" hint a keyboard-operable control with ARIA state.
+    document.querySelectorAll('.artist-card').forEach((card, i) => {
+      const hint = card.querySelector('.artist-toggle-hint');
+      const expanded = card.querySelector('.artist-expanded');
+      if (!hint || !expanded) return;
+      if (!expanded.id) expanded.id = 'artist-expanded-' + i;
+      hint.setAttribute('role', 'button');
+      hint.setAttribute('tabindex', '0');
+      hint.setAttribute('aria-expanded', 'false');
+      hint.setAttribute('aria-controls', expanded.id);
+      hint.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleArtist(card);
+        }
+      });
+    });
 
     // Clicking a portfolio thumbnail opens that artist's gallery page.
     // The artist slug is derived from the image path: /images/gallery/<slug>/...

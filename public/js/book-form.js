@@ -30,9 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         body: formData
       });
-      const data = await response.json();
+      let data = {};
+      try { data = await response.json(); } catch { data = {}; }
 
-      if (data.success) {
+      if (response.ok && data.success) {
         msgEl.textContent = 'Booking request sent! We\'ll be in touch within 1-2 business days.';
         msgEl.className = 'form-message success';
         form.reset();
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         msgEl.className = 'form-message error';
       }
     } catch {
-      msgEl.textContent = 'Failed to send. Please call us at 401-369-7771 or email powerlinetattoo@gmail.com.';
+      msgEl.textContent = 'Failed to send. Please call us at 401-369-7771 or email info@powerlinetattoo.com.';
       msgEl.className = 'form-message error';
     }
 

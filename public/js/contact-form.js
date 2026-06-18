@@ -31,6 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Match the server's per-field attachment caps before uploading.
+    const placement = form.querySelector('[name="placementPhotos"]');
+    const refs = form.querySelector('[name="referenceImages"]');
+    if (placement && placement.files.length > 3) {
+      showMessage('Please attach no more than 3 placement photos.', 'error');
+      return;
+    }
+    if (refs && refs.files.length > 5) {
+      showMessage('Please attach no more than 5 reference images.', 'error');
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
 
@@ -39,9 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         body: new FormData(form)
       });
-      const data = await response.json();
+      let data = {};
+      try { data = await response.json(); } catch { data = {}; }
 
-      if (data.success) {
+      if (response.ok && data.success) {
         showMessage(
           "Request sent! We'll get back to you soon — please check your spam folder if you don't see our reply in your inbox.",
           'success'

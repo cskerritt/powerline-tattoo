@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return img.dataset.full || img.src;
   });
   let currentIdx = 0;
+  let lastFocused = null;
 
   function showLightbox() {
     const src = srcs[currentIdx];
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function hideLightbox() {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
   }
 
   function navigate(direction) {
@@ -44,10 +46,23 @@ document.addEventListener('DOMContentLoaded', () => {
     showLightbox();
   }
 
+  // Make each thumbnail focusable and operable by keyboard (Enter / Space).
   items.forEach((item, i) => {
-    item.addEventListener('click', () => {
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', `View tattoo ${i + 1} of ${items.length} (open larger)`);
+    const open = () => {
+      lastFocused = item;
       currentIdx = i;
       showLightbox();
+      if (lbClose) lbClose.focus();
+    };
+    item.addEventListener('click', open);
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        open();
+      }
     });
   });
 
@@ -61,6 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') hideLightbox();
     if (e.key === 'ArrowLeft') navigate(-1);
     if (e.key === 'ArrowRight') navigate(1);
+  });
+
+  // Trap Tab focus within the modal while it is open.
+  lightbox.addEventListener('keydown', e => {
+    if (e.key !== 'Tab' || !lightbox.classList.contains('active')) return;
+    const focusables = [lbClose, lbPrev, lbNext].filter(Boolean);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    else if (!focusables.includes(document.activeElement)) { e.preventDefault(); first.focus(); }
   });
 
   // Swipe support (mobile)

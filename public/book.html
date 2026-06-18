@@ -7,7 +7,13 @@
   <meta name="description" content="Book a tattoo appointment at Powerline Tattoo in Cranston, RI. Choose your artist, share your idea, and send a request — we'll reach out to set up your consultation.">
   <meta property="og:title" content="Book Your Session — Powerline Tattoo">
   <meta property="og:description" content="Request a custom tattoo appointment. Choose from our artists, share your vision, and we'll reach out to get you started.">
-  <meta property="og:image" content="/images/shop/shop-01.jpg">
+  <meta property="og:image" content="https://powerlinetattoo.com/images/shop/shop-01.jpg">
+  <meta property="og:url" content="https://powerlinetattoo.com/book">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Book Your Session — Powerline Tattoo">
+  <meta name="twitter:description" content="Request a custom tattoo appointment. Choose from our artists, share your vision, and we'll reach out to get you started.">
+  <meta name="twitter:image" content="https://powerlinetattoo.com/images/shop/shop-01.jpg">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -199,6 +205,11 @@
         </div>
 
         <form id="booking-form" enctype="multipart/form-data" novalidate>
+
+          <!-- Honeypot: hidden from real users; bots that fill it are silently dropped. -->
+          <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+            <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
 
           <div class="form-row">
             <div class="form-group">
