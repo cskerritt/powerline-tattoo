@@ -1934,12 +1934,3 @@ body {
   color: var(--text-muted);
   font-size: 0.8125rem;
 }
-.testimonials-attribution {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  margin-top: 2.5rem;
-}
-.testimonials-attribution a {
-  color: var(--accent);
-}
