@@ -68,6 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Send Request';
+    submitBtn.textContent = 'Submit';
   });
 });

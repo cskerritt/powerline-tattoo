@@ -247,7 +247,7 @@
             </div>
 
             <div class="form-group">
-              <label for="contact-phone">Phone Number <span class="req">*</span></label>
+              <label for="contact-phone">Phone number <span class="req">*</span></label>
               <input type="tel" id="contact-phone" name="phone" placeholder="(401) 000-0000" autocomplete="tel" required>
             </div>
 
@@ -324,7 +324,12 @@
             </div>
 
             <div class="form-group">
-              <label for="contact-placement-photos">To help us with the design process and to provide a more accurate estimate, please include 1-3 photos of the placement on YOUR body where you would like the tattoo</label>
+              <label for="contact-spam-ack">There is a chance our response may be directed to your spam folder. Please type "I understand" below so we know you understand that you may need to check your spam folder for a response if you do not see it in your inbox <span class="req">*</span></label>
+              <textarea id="contact-spam-ack" name="spamAck" placeholder="Type &quot;I understand&quot;" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-placement-photos">To help us with the design process and to provide a more accurate estimate please include 1-3 photos of the placement on YOUR body where you would like the tattoo</label>
               <input type="file" id="contact-placement-photos" name="placementPhotos" accept="image/*" multiple>
             </div>
 
@@ -336,7 +341,7 @@
             <div class="form-group">
               <label>How did you hear about us? <span class="req">*</span></label>
               <div class="checkbox-group">
-                <label class="checkbox-item"><input type="checkbox" name="hearAbout" value="Word of mouth/ Personal recommendation"> Word of mouth / Personal recommendation</label>
+                <label class="checkbox-item"><input type="checkbox" name="hearAbout" value="Word of mouth/ Personal recommendation"> Word of mouth/ Personal recommendation</label>
                 <label class="checkbox-item"><input type="checkbox" name="hearAbout" value="Instagram"> Instagram</label>
                 <label class="checkbox-item"><input type="checkbox" name="hearAbout" value="Facebook"> Facebook</label>
                 <label class="checkbox-item"><input type="checkbox" name="hearAbout" value="Tik Tok"> Tik Tok</label>
@@ -346,17 +351,7 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="contact-hear-other">If you selected "Other", please specify</label>
-              <input type="text" id="contact-hear-other" name="hearAboutOther" placeholder="Optional">
-            </div>
-
-            <div class="form-group">
-              <label for="contact-spam-ack">There is a chance our response may be directed to your spam folder. Please type "I understand" below so we know you understand that you may need to check your spam folder for a response if you do not see it in your inbox <span class="req">*</span></label>
-              <input type="text" id="contact-spam-ack" name="spamAck" placeholder="Type &quot;I understand&quot;" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Request</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
 
             <div id="contact-form-message" class="form-message" style="display: none;"></div>
 

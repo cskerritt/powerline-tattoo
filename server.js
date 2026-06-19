@@ -94,7 +94,7 @@ const FIELD_MAX = {
   name: 120, email: 254, phone: 40, subject: 200, description: 5000,
   artist: 160, colorOrBw: 40, skinTone: 40, bodyArea: 200,
   areaConflicts: 2000, designSpecifics: 2000, processSpecifics: 2000,
-  scheduleFlexibility: 2000, hearAboutOther: 200, spamAck: 120,
+  scheduleFlexibility: 2000, spamAck: 120,
   idea: 5000, size: 120, placement: 200
 };
 function overLongField(b) {
@@ -143,8 +143,7 @@ app.post('/api/contact', formLimiter, contactUpload, async (req, res) => {
     const attachments = [...(files.placementPhotos || []), ...(files.referenceImages || [])]
       .map(f => ({ filename: f.originalname, content: f.buffer }));
 
-    let heardLine = hearAbout.join(', ');
-    if (b.hearAboutOther && b.hearAboutOther.trim()) heardLine += ` — ${b.hearAboutOther.trim()}`;
+    const heardLine = hearAbout.join(', ');
 
     const text = [
       `Name: ${b.name}`,
