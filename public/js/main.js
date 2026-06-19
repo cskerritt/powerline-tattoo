@@ -28,7 +28,7 @@ function getNavHTML(activePage) {
       <div class="nav-inner">
         <a href="/" class="nav-logo"><img src="/images/logo/powerline-logo.png" alt="Powerline Tattoo" style="height: 50px;"></a>
         <ul class="nav-links">${navLinks}</ul>
-        <a href="/book" class="nav-book">Book Now</a>
+        <a href="/contact" class="nav-book">Book Now</a>
         <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -36,7 +36,7 @@ function getNavHTML(activePage) {
     </nav>
     <div class="nav-overlay" id="nav-overlay">
       ${links.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
-      <a href="/book" class="nav-book">Book Now</a>
+      <a href="/contact" class="nav-book">Book Now</a>
     </div>
   `;
 }
@@ -56,7 +56,7 @@ function getFooterHTML() {
             <a href="/">Home</a>
             <a href="/artists">Artists</a>
             <a href="/gallery">Gallery</a>
-            <a href="/book">Book Now</a>
+            <a href="/contact">Book Now</a>
           </div>
           <div class="footer-col">
             <h4>Info</h4>

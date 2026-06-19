@@ -28,6 +28,12 @@ app.use(helmet({
 // Middleware (bounded so oversized JSON/urlencoded bodies are rejected).
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: true, limit: '100kb' }));
+
+// Booking is consolidated into the single comprehensive request form at /contact.
+// Redirect the old /book route (and any stale /book.html link) there. Registered
+// before express.static so a direct hit on /book.html redirects too.
+app.get(['/book', '/book.html'], (req, res) => res.redirect(301, '/contact'));
+
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: '1h',
   setHeaders: (res, filePath) => {
@@ -94,8 +100,7 @@ const FIELD_MAX = {
   name: 120, email: 254, phone: 40, subject: 200, description: 5000,
   artist: 160, colorOrBw: 40, skinTone: 40, bodyArea: 200,
   areaConflicts: 2000, designSpecifics: 2000, processSpecifics: 2000,
-  scheduleFlexibility: 2000, spamAck: 120,
-  idea: 5000, size: 120, placement: 200
+  scheduleFlexibility: 2000, spamAck: 120
 };
 function overLongField(b) {
   for (const k of Object.keys(FIELD_MAX)) {
@@ -182,58 +187,8 @@ app.post('/api/contact', formLimiter, contactUpload, async (req, res) => {
   }
 });
 
-// POST /api/book — Booking fallback form
-app.post('/api/book', formLimiter, upload.single('reference'), async (req, res) => {
-  const { name, email, phone, artist, idea, size, placement, website } = req.body;
-
-  // Honeypot
-  if (website && String(website).trim()) return res.json({ success: true });
-
-  if (!name || !email || !idea) {
-    return res.status(400).json({ error: 'Name, email, and tattoo idea are required.' });
-  }
-  if (!EMAIL_RE.test(String(email).trim())) {
-    return res.status(400).json({ error: 'Please enter a valid email address.' });
-  }
-  const longField = overLongField(req.body);
-  if (longField) {
-    return res.status(400).json({ error: 'One of your answers is too long. Please shorten it and try again.' });
-  }
-
-  if (!transporter) {
-    return res.status(503).json({ error: `Our form is temporarily unavailable. Please call us at ${PHONE}.` });
-  }
-
-  try {
-    const mailOptions = {
-      from: `"Powerline Tattoo Website" <${process.env.SMTP_USER}>`,
-      to: MAIL_TO,
-      replyTo: email,
-      subject: `Booking Request: ${name}`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${phone || 'Not provided'}`,
-        `Preferred Artist: ${artist || 'No preference'}`,
-        `Size: ${size || 'Not specified'}`,
-        `Placement: ${placement || 'Not specified'}`,
-        `\nTattoo Idea:\n${idea}`
-      ].join('\n'),
-      attachments: req.file ? [{
-        filename: req.file.originalname,
-        content: req.file.buffer
-      }] : []
-    };
-    await transporter.sendMail(mailOptions);
-    res.json({ success: true });
-  } catch (err) {
-    console.error('Booking form error:', err);
-    res.status(500).json({ error: 'Failed to send booking request. Please try again.' });
-  }
-});
-
 // SPA-style routing: serve HTML pages without .html extension
-const pages = ['artists', 'gallery', 'book', 'info', 'about', 'contact'];
+const pages = ['artists', 'gallery', 'info', 'about', 'contact'];
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', `${page}.html`));

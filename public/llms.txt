@@ -33,7 +33,6 @@ Powerline Tattoo is a private, appointment-only custom tattoo studio in Cranston
 - Home: https://powerlinetattoo.com/
 - Artists: https://powerlinetattoo.com/artists
 - Gallery: https://powerlinetattoo.com/gallery
-- Book: https://powerlinetattoo.com/book
 - Info (FAQ/Aftercare): https://powerlinetattoo.com/info
 - About: https://powerlinetattoo.com/about
 - Contact: https://powerlinetattoo.com/contact
